@@ -16,14 +16,42 @@ public class BookDao {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	
+	
+	public void bookSetting() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://127.0.0.1:3306/library_db";
+			conn = DriverManager.getConnection(url, "library", "library");
+		} catch (ClassNotFoundException e) {
+			System.out.println("error: 드라이버 로딩 실패 - " + e);
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+	}
+	
+	public void close() {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+	}
 
 	public void bookSelect() {
 
 		try {
 			System.out.println("select");
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306/library_db";
-			conn = DriverManager.getConnection(url, "library", "library");
+			bookSetting();
 			
 			String query = "";
 			query += " select book_id,";
@@ -32,10 +60,9 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			
-			int count = pstmt.executeUpdate();
+			
 			int id;
 			String name;
-			
 			while (rs.next()) {
 
 				id = rs.getInt("book_id");
@@ -44,29 +71,15 @@ public class BookDao {
 				bookList.add(bookVo);
 
 			}
+			System.out.println("select");
+//			for (int i = 0; i < bookList.size(); i++) {
+//				System.out.println(bookList.get(i).toString());
+//			}
 			
-			System.out.println(count + "건 등록완료");
-			
-		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
-		} finally {
-			// 5. 자원정리
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			}
-		}
+		} 
+		close();
 
 	}
 
