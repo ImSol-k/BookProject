@@ -35,6 +35,18 @@ public class BookVo {
 		this.rent = rent;
 		this.rentDate = rentDate;
 	}
+	public BookVo(int bookId, String title, String author, String pubs, String pubDate, String rent, String rentDate,
+			int memberId) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.author = author;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.rent = rent;
+		this.rentDate = rentDate;
+		this.memberId = memberId;
+	}
 	public int getBookId() {
 		return bookId;
 	}
