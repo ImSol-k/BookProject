@@ -9,15 +9,23 @@ public class BookVo {
 	private String pubDate;
 	private String rent;
 	private String rentDate;
-	private String memberId;
+	private int memberId;
 	
 	public BookVo(int bookId, String title) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
 	}
-	public BookVo(int bookId, String title, String author, String pubs, String pubDate, String rent, String rentDate,
-			String memberId) {
+	public BookVo(String title, String author, String pubs, String pubDate, String rent, String rentDate) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.rent = rent;
+		this.rentDate = rentDate;
+	}
+	public BookVo(int bookId, String title, String author, String pubs, String pubDate, String rent, String rentDate) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
@@ -26,10 +34,7 @@ public class BookVo {
 		this.pubDate = pubDate;
 		this.rent = rent;
 		this.rentDate = rentDate;
-		this.memberId = memberId;
 	}
-
-
 	public int getBookId() {
 		return bookId;
 	}
@@ -72,17 +77,17 @@ public class BookVo {
 	public void setRentDate(String rentDate) {
 		this.rentDate = rentDate;
 	}
-	public String getMemberId() {
+	public int getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(String memberId) {
+	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
 
 
 	@Override
 	public String toString() {
-		return "BookDao [bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
+		return "[bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
 				+ pubDate + ", rent=" + rent + ", rentDate=" + rentDate + ", memberId=" + memberId + "]";
 	}
 	
