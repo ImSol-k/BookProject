@@ -1,68 +1,85 @@
 package com.book;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class BookDao {
 	
-	private int bookId;
-	private String title;
-	private String author;
-	private String pubs;
-	private String pubDate;
-	private String memberId;
-	
-	
-	public BookDao(int bookId, String title, String author, String pubs, String pubDate, String memberId) {
-		super();
-		this.bookId = bookId;
-		this.title = title;
-		this.author = author;
-		this.pubs = pubs;
-		this.pubDate = pubDate;
-		this.memberId = memberId;
+	List<BookVo> bookList = new ArrayList<BookVo>();
+	BookVo bookVo;
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	public void bookSelect() {
+
+		try {
+			System.out.println("select");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://127.0.0.1:3306/library_db";
+			conn = DriverManager.getConnection(url, "library", "library");
+			
+			String query = "";
+			query += " select book_id,";
+			query += " 		  title";
+			query += " from library";
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			int count = pstmt.executeUpdate();
+			int id;
+			String name;
+			
+			while (rs.next()) {
+
+				id = rs.getInt("book_id");
+				name = rs.getString("title");
+				bookVo = new BookVo(id, name);
+				bookList.add(bookVo);
+
+			}
+			
+			System.out.println(count + "건 등록완료");
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("error: 드라이버 로딩 실패 - " + e);
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			// 5. 자원정리
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
+		}
+
 	}
 
-	
-	public int getBookId() {
-		return bookId;
-	}
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public String getPubs() {
-		return pubs;
-	}
-	public void setPubs(String pubs) {
-		this.pubs = pubs;
-	}
-	public String getPubDate() {
-		return pubDate;
-	}
-	public void setPubDate(String pubDate) {
-		this.pubDate = pubDate;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void bookInsert() {
+
 	}
 
-	
-	@Override
-	public String toString() {
-		return "BookDao [bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
-				+ pubDate + ", memberId=" + memberId + "]";
+	public void bookDelete() {
+
+	}
+
+	public void bookUpdate() {
+
 	}
 
 }
