@@ -4,9 +4,9 @@ public class BookApp {
 
 	public static void main(String[] args) {
 		
-		BookDao bookDao = new BookDao();
+		BookSystem bookSystem = new BookSystem();
 		
-		bookDao.bookSelect();
+		bookSystem.main();
 		
 		
 	}
