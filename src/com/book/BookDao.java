@@ -17,7 +17,7 @@ public class BookDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	
+	//DB연결
 	public void bookSetting() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -31,6 +31,7 @@ public class BookDao {
 		
 	}
 	
+	//자원정리
 	public void close() {
 		try {
 			if (rs != null) {
@@ -50,7 +51,7 @@ public class BookDao {
 	public void bookSelect() {
 
 		try {
-			System.out.println("select");
+			//System.out.println("select"); //확인용
 			bookSetting();
 			
 			String query = "";
@@ -71,7 +72,7 @@ public class BookDao {
 				bookList.add(bookVo);
 
 			}
-			System.out.println("select");
+			//System.out.println("select"); //확인용
 //			for (int i = 0; i < bookList.size(); i++) {
 //				System.out.println(bookList.get(i).toString());
 //			}
@@ -84,7 +85,18 @@ public class BookDao {
 	}
 
 	public void bookInsert() {
+		bookSetting();
 
+		try {
+			String query = "";
+			query += " insert into library";
+			query += " values(null, ?, ?)";
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
 	}
 
 	public void bookDelete() {
