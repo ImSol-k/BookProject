@@ -1,16 +1,16 @@
 
-
-
-
 drop table librarys;
 drop table members;
 drop table rents;
     
+show databases;
+show tables;
   
 
 select * from librarys;
 select * from members;
-    
+select * from rents;
+
 update library 
    set title = '조선왕조실록',
 	   author_name = '박영규',

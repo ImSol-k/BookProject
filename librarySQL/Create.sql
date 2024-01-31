@@ -3,7 +3,14 @@ create database library_db
   default character set utf8mb4
     collate utf8mb4_general_ci
     default encryption='n';
+    
 
+drop database library_db;
+drop table librarys;
+drop table members;
+drop table rents;
+
+show tables;
 
 CREATE TABLE `librarys` (
 	`book_id`	int	NOT NULL,
@@ -29,8 +36,7 @@ CREATE TABLE `rents` (
 	`rent`	varchar(10)	NOT NULL,
 	`book_id`	int	NOT NULL,
 	`member_num`	int	NOT NULL,
-	`rent_date`	date	NULL,
-	`Field`	date	NULL
+	`rent_date`	date	NULL
 );
 
 ALTER TABLE `librarys` ADD CONSTRAINT `PK_LIBRARYS` PRIMARY KEY (
@@ -84,7 +90,6 @@ REFERENCES `members` (
 	`member_num`
 );
 
-show databases;
-show tables;
+
 
 
