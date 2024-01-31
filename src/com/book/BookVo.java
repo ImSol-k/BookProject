@@ -16,14 +16,20 @@ public class BookVo {
 		this.bookId = bookId;
 		this.title = title;
 	}
-	public BookVo(String title, String author, String pubs, String pubDate, String rent, String rentDate) {
+	public BookVo(int bookId, String title, String author, String pubs, String pubDate) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.author = author;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+	}
+	public BookVo(String title, String author, String pubs, String pubDate) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.pubs = pubs;
 		this.pubDate = pubDate;
-		this.rent = rent;
-		this.rentDate = rentDate;
 	}
 	public BookVo(int bookId, String title, String author, String pubs, String pubDate, String rent, String rentDate) {
 		super();

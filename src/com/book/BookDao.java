@@ -58,12 +58,10 @@ public class BookDao {
 			String query = "";
 			query += " select book_id,";
 			query += " 		  title,";
-			query += " 		  author_name,";
+			query += " 		  author,";
 			query += " 		  pubs,";
 			query += " 		  pub_date,";
-			query += " 		  rent,";
-			query += " 		  rent_date,";
-			query += " 		  member_id";
+			query += " 		  rent";
 			query += " from library";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -71,14 +69,12 @@ public class BookDao {
 			while (rs.next()) {
 				bookId = rs.getInt("book_id");
 				title = rs.getString("title");
-				authorName = rs.getString("author_name");
+				authorName = rs.getString("author");
 				pubs = rs.getString("pubs");
 				pub_date = rs.getString("pub_date");
-				rent = rs.getString("rent");
-				rentDate = rs.getString("rent_date");
 				memberId = rs.getInt("member_id");
 
-				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date, rent, rentDate);
+				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
 
 			}
@@ -106,15 +102,13 @@ public class BookDao {
 		try {
 			String query = "";
 			query += " insert into library";
-			query += " values (null, ?, ?, ?, ?, ?, ?, null)";
+			query += " values (null, ?, ?, ?, ?,  null)";
 			pstmt = conn.prepareStatement(query);
 
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setString(3, book.getPubs());
 			pstmt.setString(4, book.getPubDate());
-			pstmt.setString(5, book.getRent());
-			pstmt.setString(6, book.getRentDate());
 			// pstmt.setInt(7, book.getMemberId());
 
 			pstmt.executeUpdate();
@@ -150,24 +144,20 @@ public class BookDao {
 		
 		try {
 			String query = "";
-			query += " update library";
+			query += " update librarys";
 			query += "    set title = ?,";
-			query += " 		  author_name = ?,";
+			query += " 		  author = ?,";
 			query += " 		  pubs = ?,";
 			query += " 		  pub_date = ?,";
-			query += " 		  rent = ?,";
-			query += " 		  rent_date = ?,";
-			query += " 		  member_id = null";
+			query += " 		  member_num = null";
 			query += " where book_id = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setString(3, book.getPubs());
 			pstmt.setString(4, book.getPubDate());
-			pstmt.setString(5, book.getRent());
-			pstmt.setString(6, book.getRentDate());
 			//pstmt.setInt(7, book.getMemberId());
-			pstmt.setInt(7, book.getBookId());
+			pstmt.setInt(5, book.getBookId());
 
 			// rs = pstmt.executeQuery();
 			pstmt.executeUpdate();
