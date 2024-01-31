@@ -1,19 +1,21 @@
 
+drop database library_db;
+
 create database library_db
   default character set utf8mb4
     collate utf8mb4_general_ci
     default encryption='n';
     
 
-drop database library_db;
-drop table librarys;
-drop table members;
-drop table rents;
 
-show tables;
+#drop table librarys;
+#drop table members;
+#drop table rents;
+
+#show tables;
 
 CREATE TABLE `librarys` (
-	`book_id`	int	NOT NULL,
+	`book_id`	int	auto_increment primary key,
 	`rent`	varchar(10)	NOT NULL,
 	`title`	varchar(20)	NOT NULL,
 	`author`	varchar(10)	NULL,
@@ -22,7 +24,7 @@ CREATE TABLE `librarys` (
 );
 
 CREATE TABLE `members` (
-	`member_num`	int	NOT NULL,
+	`member_num`	int	auto_increment primary key,
 	`book_id`	int	NOT NULL,
 	`rent`	varchar(10)	NOT NULL,
 	`member_id`	varchar(20)	NOT NULL,
@@ -33,7 +35,7 @@ CREATE TABLE `members` (
 );
 
 CREATE TABLE `rents` (
-	`rent`	varchar(10)	NOT NULL,
+	`rent`	varchar(10)	primary key,
 	`book_id`	int	NOT NULL,
 	`member_num`	int	NOT NULL,
 	`rent_date`	date	NULL

@@ -62,7 +62,7 @@ public class BookDao {
 			query += " 		  pubs,";
 			query += " 		  pub_date,";
 			query += " 		  rent";
-			query += " from library";
+			query += " from librarys";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 
@@ -72,7 +72,6 @@ public class BookDao {
 				authorName = rs.getString("author");
 				pubs = rs.getString("pubs");
 				pub_date = rs.getString("pub_date");
-				memberId = rs.getInt("member_id");
 
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
@@ -101,7 +100,7 @@ public class BookDao {
 
 		try {
 			String query = "";
-			query += " insert into library";
+			query += " insert into librarys";
 			query += " values (null, ?, ?, ?, ?,  null)";
 			pstmt = conn.prepareStatement(query);
 
@@ -123,7 +122,7 @@ public class BookDao {
 
 		try {
 			String query = "";
-			query += " delete from library";
+			query += " delete from librarys";
 			query += " where book_id = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, num);
@@ -149,7 +148,7 @@ public class BookDao {
 			query += " 		  author = ?,";
 			query += " 		  pubs = ?,";
 			query += " 		  pub_date = ?,";
-			query += " 		  member_num = null";
+			
 			query += " where book_id = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, book.getTitle());
