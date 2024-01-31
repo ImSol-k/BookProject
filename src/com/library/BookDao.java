@@ -49,10 +49,10 @@ public class BookDao {
 		}
 	}
 
+	//데이터 불러오기
 	public void bookSelect() {
 
 		try {
-			System.out.println("select"); //확인용
 			bookSetting();
 
 			String query = "";
@@ -75,9 +75,10 @@ public class BookDao {
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
 				
-				System.out.println("select"); //확인용
+				
 
 			}
+			System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
 //			for (int i = 0; i < bookList.size(); i++) {
 //				System.out.println(bookList.get(i).toString());
@@ -90,6 +91,7 @@ public class BookDao {
 
 	}
 
+	
 	public void showList() {
 		for (int i = 0; i < bookList.size(); i++) {
 			System.out.println(bookList.get(i).toString());
@@ -100,7 +102,7 @@ public class BookDao {
 		bookSetting();
 
 		try {
-			System.err.println("insert"); //확인용
+			//System.err.println("insert"); //확인용
 			String query = "";
 			query += " insert into librarys";
 			query += " values (null, ?, ?, ?, ?)";

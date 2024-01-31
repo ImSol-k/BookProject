@@ -18,7 +18,6 @@ public class BookVo {
 		this.title = title;
 		this.author = author;
 		this.pubs = pubs;
-		this.pubDate = pubDate;
 	}
 	public BookVo(String title, String author, String pubs, String pubDate) {
 		this.title = title;
@@ -71,7 +70,7 @@ public class BookVo {
 	
 	@Override
 	public String toString() {
-		return "BookVo [bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
+		return "[bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
 				+ pubDate + "]";
 	}
 	
