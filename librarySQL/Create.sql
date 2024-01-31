@@ -23,7 +23,7 @@ CREATE TABLE `members` (
 	`member_num`	int	auto_increment	primary key,
 	`member_id`	varchar(20)	NOT NULL,
 	`member_pw`	varchar(20)	NOT NULL,
-	`name`	varchar(30)	NOT NULL,
+	`meber_name`	varchar(30)	NOT NULL,
 	`ph`	varchar(20),
 	`address`	varchar(30)
 );
