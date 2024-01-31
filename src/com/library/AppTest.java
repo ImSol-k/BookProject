@@ -38,11 +38,12 @@ public class AppTest {
 					start = true;
 					break;
 				case 3:
-					System.out.println("<수정>");
+					bookSys.bookList();
+					bookSys.bookUpdate();
 					start = true;
 					break;
 				case 4:
-					System.out.println("<삭제>");
+					
 					start = true;
 					break;
 				case 5:
@@ -55,6 +56,7 @@ public class AppTest {
 					break;
 				default:
 					System.out.println("잘못입력하셨습니다");
+					start = true;
 					break;
 				}
 			}

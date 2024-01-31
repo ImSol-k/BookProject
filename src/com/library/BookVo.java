@@ -19,12 +19,14 @@ public class BookVo {
 		this.author = author;
 		this.pubs = pubs;
 	}
+	//create생성자
 	public BookVo(String title, String author, String pubs, String pubDate) {
 		this.title = title;
 		this.author = author;
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 	}
+	//update생성자
 	public BookVo(int bookId, String title, String author, String pubs, String pubDate) {
 		super();
 		this.bookId = bookId;
