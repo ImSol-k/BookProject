@@ -165,26 +165,24 @@ public class RentDao {
 		close();
 	}// rentUpdate()
 	
-	public void rentIntwo(RentVo rent) {
+	public void rentIntwo(String member,int rent) {
 
 		rentSetting();
-
+		MemberVo memVo = new MemberVo();
+		RentVo renVo = new RentVo();
+		memVo.setMember_id(member);
+		renVo.setBookId(rent);
 		try {
 			// System.out.println("insert"); //확인용
 			String query = "";
 			query += " insert into rents";
 			query += " values (null, (select member_num\r\n"
 					+ "					     from members\r\n"
-					+ "					     where member_id = ?), ?, date_format(now(),'%Y-%m-%d'), ?)";
+					+ "					     where member_id = ?), ?, date_format(now(),'%Y-%m-%d'), null)";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, rent.getRentdate());
-			pstmt.setString(2, rent.getReturndate());
+			pstmt.setString(1, memVo.getMember_id());
+			pstmt.setInt(2, renVo.getBookId());
 			
-			
-			
-			
-			
-
 			pstmt.executeUpdate();
 			System.out.println("insert");
 			System.out.println("등록 되었습니다.");
@@ -196,7 +194,7 @@ public class RentDao {
 	}// rentInsert()
 	
 	
-	public void rentUptwo(RentVo rent) {
+	public void rentUptwo(RentVo rent,MemberVo member) {
 
 		rentSetting();
 
