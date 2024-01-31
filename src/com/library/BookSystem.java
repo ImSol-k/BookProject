@@ -53,7 +53,7 @@ public class BookSystem {
 		System.out.print("출판일 >> ");
 		bookVo.setPubDate(in.nextLine());
 	
-		System.out.println(bookVo);
+		//System.out.println(bookVo);
 		
 		
 		bookDao.bookUpdate(bookVo);
@@ -62,6 +62,12 @@ public class BookSystem {
 	
 	public void bookDelete() {
 		System.out.println("<삭제>");
+		bookVo = new BookVo();
+		
+		System.out.print("삭제할 책번호 입력 >>");
+		bookVo.setBookId(in.nextInt());
+		bookDao.bookDelete(bookVo.getBookId());
+		
 		
 	}//bookDelete()
 	
