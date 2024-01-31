@@ -10,6 +10,9 @@ public class BookVo {
 	
 	
 	
+	public BookVo() {
+		super();
+	}
 	public BookVo(String title, String pubs) {
 		this.title = title;
 		this.pubs = pubs;

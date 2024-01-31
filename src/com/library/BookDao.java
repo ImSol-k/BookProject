@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BookDao {
 
-	private List<BookVo> bookList = new ArrayList<BookVo>();
+	private List<BookVo> bookList = null;
 	private BookVo bookVo;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -51,7 +51,7 @@ public class BookDao {
 
 	//데이터 불러오기
 	public void bookSelect() {
-
+		bookList = new ArrayList<BookVo>();
 		try {
 			bookSetting();
 
@@ -80,9 +80,9 @@ public class BookDao {
 			}
 			System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
-//			for (int i = 0; i < bookList.size(); i++) {
-//				System.out.println(bookList.get(i).toString());
-//			}
+			for (int i = 0; i < bookList.size(); i++) {
+				System.out.println(bookList.get(i).toString());
+			}
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -175,25 +175,61 @@ public class BookDao {
 	}//bookDelete()
 
 	public void bookUpdate(BookVo book) {
-		
 		bookSetting();
 		
 		try {
 			System.out.println("upDate"); //확인용
 			String query = "";
+			
 			query += " update librarys";
-			query += "    set title = ?,";
-			query += " 		  author = ?,";
-			query += " 		  pubs = ?,";
-			query += " 		  pub_date = ?";			
+			query += "    set book_id = ?";
+			
+			if(book.getTitle() != "") {
+				query += ", 		  title = ?";
+			}
+			if(book.getAuthor() != "") {
+				query += ", 		  author = ?";
+			}
+			if(book.getPubs() != "") {
+				query += ", 		  pubs = ?";
+			}
+			if(book.getPubDate() != "") {
+				query += ", 		  pub_date = ?";
+			}
 			query += " where book_id = ?";
+			
+			System.out.println(query);
+			System.out.println(book);
+			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, book.getTitle());
-			pstmt.setString(2, book.getAuthor());
-			pstmt.setString(3, book.getPubs());
-			pstmt.setString(4, book.getPubDate());
-			//pstmt.setInt(7, book.getMemberId());
-			pstmt.setInt(5, book.getBookId());
+			
+			int count = 1;
+			pstmt.setInt(count, book.getBookId());
+			
+			if(book.getTitle() != "") {
+				count ++;
+				pstmt.setString(count, book.getTitle());
+			}
+			if(book.getAuthor() != "") {
+				count ++;
+				pstmt.setString(count, book.getAuthor());
+			}
+			if(book.getPubs() != "") {
+				count ++;
+				pstmt.setString(count, book.getPubs());
+			}
+			if(book.getPubDate() != "") {
+				count ++;
+				pstmt.setString(count, book.getPubDate());
+			}
+			if(book.getBookId() != 0) {
+				count ++;
+				pstmt.setInt(count, book.getBookId());
+			}
+			
+			
+			
+		
 
 			// rs = pstmt.executeQuery();
 			pstmt.executeUpdate();
@@ -203,6 +239,7 @@ public class BookDao {
 			System.out.println("error:" + e);
 		}
 		close();
+		
 	}//bookUpdate()
 
 }
