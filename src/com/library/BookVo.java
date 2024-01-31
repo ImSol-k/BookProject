@@ -1,4 +1,4 @@
-package com.book;
+package com.library;
 
 public class BookVo {
 	

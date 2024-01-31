@@ -1,4 +1,4 @@
-package com.manager;
+package com.library;
 
 public class MemeberApp {
 
