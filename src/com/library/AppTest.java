@@ -6,17 +6,15 @@ public class AppTest {
 
 	public static void main(String[] args) {
 
-		BookVo bookVo2 = new BookVo("세이노의 가르침", "세이노", "데이원");
-
 		//bookDao.bookInsert(bookVo2);
 		//bookDao.bookSelect();
 		//bookDao.showList();
 		
 		Scanner in = new Scanner(System.in);
-		BookDao bookDao = new BookDao();
 		BookSystem bookSys = new BookSystem();
 		boolean start = true;
 		int num;
+		
 		try {
 			while(start) {
 				
@@ -59,15 +57,15 @@ public class AppTest {
 					start = true;
 					break;
 				}
-			}
+		}
 		} catch (Exception e) {
 			System.out.println("알 수 없는 숫자");
 		}
 		
 			
-			
+		in.close();
 		
-	}
+	}//main
 	
 
 }

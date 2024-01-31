@@ -7,8 +7,7 @@ public class BookSystem {
 	Scanner in = new Scanner(System.in);
 	BookDao bookDao = new BookDao();
 	BookVo bookVo;
-	private int bookId;
-	private String title, author, pubs, y, m, d, pubDate;
+	private String title, author, pubs, pubDate;
 	
 
 	//책 리스트 출력함수
