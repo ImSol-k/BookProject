@@ -30,7 +30,7 @@ public class BookDao {
 			System.out.println("error:" + e);
 		}
 
-	}
+	}//bookSetting()
 
 	// 자원정리
 	public void close() {
@@ -47,12 +47,12 @@ public class BookDao {
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
-	}
+	}//close()
 
+	//데이터 불러오기
 	public void bookSelect() {
 
 		try {
-			System.out.println("select"); //확인용
 			bookSetting();
 
 			String query = "";
@@ -69,15 +69,16 @@ public class BookDao {
 				bookId = rs.getInt("book_id");
 				title = rs.getString("title");
 				authorName = rs.getString("author");
-				pubs = rs.getString("pubs");
+				pubs = rs.getString("pubs"); 
 				pub_date = rs.getString("pub_date");
 
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
 				
-				System.out.println("select"); //확인용
+				
 
 			}
+			System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
 //			for (int i = 0; i < bookList.size(); i++) {
 //				System.out.println(bookList.get(i).toString());
@@ -88,19 +89,51 @@ public class BookDao {
 		}
 		close();
 
-	}
+	}//bookSelect()
 
+	
 	public void showList() {
+		try {
+			bookSetting();
+
+			String query = "";
+			query += " select book_id,";
+			query += " 		  title,";
+			query += " 		  author,";
+			query += " 		  pubs,";
+			query += " 		  pub_date";
+			query += " from librarys";
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				bookId = rs.getInt("book_id");
+				title = rs.getString("title");
+				authorName = rs.getString("author");
+				pubs = rs.getString("pubs"); 
+				pub_date = rs.getString("pub_date");
+
+				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
+				//bookList.add(bookVo);
+				
+				
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
 		for (int i = 0; i < bookList.size(); i++) {
 			System.out.println(bookList.get(i).toString());
 		}
-	}
+	}//showList()
 
 	public void bookInsert(BookVo book) {
 		bookSetting();
 
 		try {
-			System.err.println("insert"); //확인용
+			//System.err.println("insert"); //확인용
 			String query = "";
 			query += " insert into librarys";
 			query += " values (null, ?, ?, ?, ?)";
@@ -139,7 +172,7 @@ public class BookDao {
 			System.out.println("error:" + e);
 		}
 		close();
-	}
+	}//bookDelete()
 
 	public void bookUpdate(BookVo book) {
 		
@@ -170,6 +203,6 @@ public class BookDao {
 			System.out.println("error:" + e);
 		}
 		close();
-	}
+	}//bookUpdate()
 
 }

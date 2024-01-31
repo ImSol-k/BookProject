@@ -18,14 +18,15 @@ public class BookVo {
 		this.title = title;
 		this.author = author;
 		this.pubs = pubs;
-		this.pubDate = pubDate;
 	}
+	//create생성자
 	public BookVo(String title, String author, String pubs, String pubDate) {
 		this.title = title;
 		this.author = author;
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 	}
+	//update생성자
 	public BookVo(int bookId, String title, String author, String pubs, String pubDate) {
 		super();
 		this.bookId = bookId;
@@ -71,7 +72,7 @@ public class BookVo {
 	
 	@Override
 	public String toString() {
-		return "BookVo [bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
+		return "[bookId=" + bookId + ", title=" + title + ", author=" + author + ", pubs=" + pubs + ", pubDate="
 				+ pubDate + "]";
 	}
 	

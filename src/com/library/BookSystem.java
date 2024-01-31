@@ -4,175 +4,101 @@ import java.util.Scanner;
 
 public class BookSystem {
 	
-	Scanner sc = new Scanner(System.in);
+	Scanner in = new Scanner(System.in);
+	BookDao bookDao = new BookDao();
+	BookVo bookVo;
+	private int bookId;
+	private String title, author, pubs, y, m, d, pubDate;
 	
-	public void main() {
-		//메인화면
-		
-		while(true) {
-			
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("===============================");
-			System.out.println("   1.회원      |     2.관리자    |");
-			System.out.println("===============================");
-			System.out.print("입력란:");
-			
-			int choose =sc.nextInt();
-			
-			switch(choose) {
-				
-					case 1:
-						//회원
-						member();
-						break;
-						
-					case 2:
-						//관리자
-						administrator();
-						break;
-			
-			
-			}//choose
-			
-			
-			
-		}//while
-		
-		
-	}//main
+	//책 리스트 출력함수
+	public void bookList() {
+		System.out.println("<리스트>");
+		//bookDao.bookSelect();
+		bookDao.showList();
+	}//bookList()
 	
-	public void member() {
-		//회원
-		boolean in = true;
+	//책 추가함수
+	public void bookCreat() {
 		
-		while(in) {
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("=============================");
-			System.out.println(" 1.로그인 | 2.회원가입 | 3.뒤로가기 ");
-			System.out.println("=============================");
-			System.out.print("입력란:");
-			
-			int mem = sc.nextInt();
-			
-			switch(mem) {
-			
-					case 1:
-						//로그인
-						log();
-						break;
-					
-					case 2:	
-						//회원가입
-						break;
-						
-					case 3:	
-						main();
-						break;
-			}//swich(mem)			
+		System.out.println("<책등록>");
+		System.out.print("책이름 >> ");
+		title = in.nextLine();
+		System.out.print("작가 >> ");
+		author = in.nextLine();
+		System.out.print("출판사 >> ");
+		pubs = in.nextLine();
+		System.out.println("출판일 >> ");
+		System.out.print("년 >> ");
+		y = in.nextLine();
+		System.out.print("월 >> ");
+		m = in.nextLine();
+		System.out.print("일 >> ");
+		d = in.nextLine();
+		pubDate = y+"-"+m+"-"+d;
+		bookVo = new BookVo(title, author, pubs, pubDate);
+		bookDao.bookInsert(bookVo);
 		
-		}//in
-		
-	}//member
+		System.out.println("추가완료");
+	}//BookCreat()
 	
-	public void administrator() {
-		//관리자
-		boolean on = true;
+	public void bookUpdate() {
+		System.out.println("<수정>");
 		
-		while(on) {
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("=========================================");
-			System.out.println(" 1.대여현황 | 2.회원리스트 | 3.책관리 | 4.뒤로가기");
-			System.out.println("=========================================");
-			System.out.print("입력란:");
-			
-			int mg = sc.nextInt();
-			
-			switch(mg) {
-					
-					case 1:
-						//대여현황
-						break;
-						
-					case 2:
-						//회원리스트
-						break;
-						
-					case 3:
-						//책관리
-						break;
-						
-					case 4:
-						main();
-						break;//나가기
-						
-						
-						
-					default:
-						//잘못된 번호 오류표시
-						System.out.println("다시 입력해주세요");
-						break;
-			
-			
-			}//mg
+		String[] update = new String[7];
+		System.out.print("수정할 책 번호 입력 (건너뛰기:enter)>> ");
+		bookId = in.nextInt();
 		
-		}//on
-		
-		
-	}
+		in.nextLine();
+		System.out.print("책이름 >> ");
+		update[0] = in.nextLine();
+		System.out.print("작가 >> ");
+		update[1] = in.nextLine();
+		System.out.print("출판사 >> ");
+		update[2] = in.nextLine();
+		System.out.println("출판일 >> ");
+		System.out.print("년 >> ");
+		update[3] = in.nextLine();
+		System.out.print("월 >> ");
+		update[4] = in.nextLine();
+		System.out.print("일 >> ");
+		update[5] = in.nextLine();
+		pubDate = update[3]+"-"+update[4]+"-"+update[5];
+		for (int i = 0; i < update.length; i++) {
+			switch (i) {
+			case 0:
+				if(update[i] == null) {
+					update[i] = bookVo.getTitle();
+				}
+				break;
+			case 1:
+				if(update[i] == null) {
+					update[i] = bookVo.getAuthor();
+				}
+				break;
+			case 2:
+				if(update[i] == null) {
+					update[i] = bookVo.getPubs();
+				}
+				break;
+			case 3:
+				if(update[i] == null) {
+					update[i] = bookVo.get;
+				}
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			}
+		}
+		bookVo = new BookVo(bookId, title, author, pubs, pubDate);
+		bookDao.bookUpdate(bookVo);
+	}//bookUpdate() 
 	
-	public void log() {
-		//로그인
-		while(true) {
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("=================================================================");
-			System.out.println(" 1.대여하기 | 2.반납하기 | 3.회원정보수정하기 | 4.나의 대여 및 반납 | 5.뛰로가기");
-			System.out.println("=================================================================");
-			System.out.print("입력란:");
-			
-			int lo =sc.nextInt();
-			
-			switch(lo) {
-					
-					case 1:
-						break;
-						
-					
-					case 2:
-						break;
-						
-						
-						
-					case 3:
-						break;
-						
-						
-					case 4:
-						break;
-						
-						
-					case 5:
-						member();
-						break;
-			
-			
-			
-			}//lo
-			
-		}//while
-		
-		
-	}//log
-
+	public void bookDelete() {
+		System.out.println("<삭제>");
+	}//bookDelete()
+	
+	
+	
 }
