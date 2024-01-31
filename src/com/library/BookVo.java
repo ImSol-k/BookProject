@@ -72,6 +72,10 @@ public class BookVo {
 	}
 	
 	
+	public void showInfo() {
+		System.out.println("번호 : " + bookId + "\t| 제목 : " + title + "\t\t| 작가 : " + author + "\t| 출판사 : " + pubs + "\t| 출판일 : " + pubDate);
+	}
+	
 	
 	@Override
 	public String toString() {

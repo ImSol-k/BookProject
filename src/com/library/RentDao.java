@@ -140,7 +140,7 @@ public class RentDao {
 		rentSetting();
 
 		try {
-			System.out.println("upDate"); // 확인용
+			//System.out.println("upDate"); // 확인용
 			String query = "";
 			query += " update rents";
 			query += "    set member_num= ?,";
@@ -155,7 +155,7 @@ public class RentDao {
 			pstmt.setString(4, rent.getReturndate());
 			pstmt.setInt(5, rent.getRentId());
 
-			System.out.println("upDate");
+			//System.out.println("upDate");
 			pstmt.executeUpdate();
 			System.out.println("수정되었습니다");
 
@@ -163,6 +163,69 @@ public class RentDao {
 			System.out.println("error:" + e);
 		}
 		close();
-	}// bookUpdate()
+	}// rentUpdate()
+	
+	public void rentIntwo(RentVo rent) {
+
+		rentSetting();
+
+		try {
+			// System.out.println("insert"); //확인용
+			String query = "";
+			query += " insert into rents";
+			query += " values (null, (select member_num\r\n"
+					+ "					     from members\r\n"
+					+ "					     where member_id = ?), ?, date_format(now(),'%Y-%m-%d'), ?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, rent.getRentdate());
+			pstmt.setString(2, rent.getReturndate());
+			
+			
+			
+			
+			
+
+			pstmt.executeUpdate();
+			System.out.println("insert");
+			System.out.println("등록 되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}// rentInsert()
+	
+	
+	public void rentUptwo(RentVo rent) {
+
+		rentSetting();
+
+		try {
+			//System.out.println("upDate"); // 확인용
+			String query = "";
+			query += " update rents";
+			query += "    set member_num= ?,";
+			query += " 		  book_id = ?,";
+			query += " 		  rent_date = ?,";
+			query += " 		  return_date = ?";
+			query += " where rent_id = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, rent.getMembernum());
+			pstmt.setInt(2, rent.getBookId());
+			pstmt.setString(3, rent.getRentdate());
+			pstmt.setString(4, rent.getReturndate());
+			pstmt.setInt(5, rent.getRentId());
+
+			//System.out.println("upDate");
+			pstmt.executeUpdate();
+			System.out.println("수정되었습니다");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}// Update()
+	
+	
 
 }

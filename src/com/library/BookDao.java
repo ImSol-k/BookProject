@@ -74,14 +74,13 @@ public class BookDao {
 
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
-				
-				
 
 			}
-			System.out.println("불러오기 완료"); //확인용
+			//System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
 			for (int i = 0; i < bookList.size(); i++) {
-				System.out.println(bookList.get(i).toString());
+				//System.out.println(bookList.get(i).toString());
+				bookList.get(i).showInfo();
 			}
 
 		} catch (SQLException e) {
@@ -115,9 +114,6 @@ public class BookDao {
 
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				//bookList.add(bookVo);
-				
-				
-
 			}
 
 		} catch (SQLException e) {
@@ -136,12 +132,46 @@ public class BookDao {
 			//System.err.println("insert"); //확인용
 			String query = "";
 			query += " insert into librarys";
-			query += " values (null, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(query);
+			query += " values (null";
+			query += " , ?";
+			if(bookVo.getAuthor() != "") {
+				query += " , ?";
+			}else {
+				query += " , null";
+			}
+			if(bookVo.getPubs() != "") {
+				query += " , ?";
+			}else {
+				query += " , null";
+			}
+			if(bookVo.getPubDate() != "") {
+				query += " , ?";
+			}else {
+				query += " , null";
+			}
+			query += " )";
+			
+			System.out.println(query);
+			/*
+			pstmt = conn.prepareStatement(query);			
+			
+			int count = 1;
 			pstmt.setString(1, book.getTitle());
-			pstmt.setString(2, book.getAuthor());
-			pstmt.setString(3, book.getPubs());
-			pstmt.setString(4, book.getPubDate());
+			if(bookVo.getAuthor() != "") {
+				count++;
+				pstmt.setString(count, book.getAuthor());
+			}
+			if(bookVo.getPubs() != "") {
+				count++;
+				pstmt.setString(count, book.getPubs());
+			}
+			if(bookVo.getPubDate() != "") {
+				count++;
+				pstmt.setString(count, book.getPubDate());
+			}*/
+//			pstmt.setString(2, book.getAuthor());
+//			pstmt.setString(3, book.getPubs());
+//			pstmt.setString(4, book.getPubDate());
 			
 			pstmt.executeUpdate();
 			System.out.println("등록 되었습니다.");
@@ -156,7 +186,7 @@ public class BookDao {
 		bookSetting();
 
 		try {
-			System.out.println("delete"); //확인용
+			//System.out.println("delete"); //확인용
 			
 			String query = "";
 			query += " delete from librarys";
@@ -165,7 +195,7 @@ public class BookDao {
 			pstmt.setInt(1, num);
 
 			pstmt.executeUpdate();
-			System.out.println("삭제 되었습니다.");
+			//System.out.println("삭제 되었습니다.");
 			bookList.remove(num - 1);
 
 		} catch (SQLException e) {
@@ -178,7 +208,7 @@ public class BookDao {
 		bookSetting();
 		
 		try {
-			System.out.println("upDate"); //확인용
+			//System.out.println("upDate"); //확인용
 			String query = "";
 			
 			query += " update librarys";
@@ -233,7 +263,7 @@ public class BookDao {
 
 			// rs = pstmt.executeQuery();
 			pstmt.executeUpdate();
-			System.out.println("수정되었습니다");
+			//System.out.println("수정되었습니다");
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);

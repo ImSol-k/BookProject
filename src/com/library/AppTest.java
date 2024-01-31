@@ -18,13 +18,13 @@ public class AppTest {
 		try {
 			while(start) {
 				
-				System.out.println("========================================");
+				System.out.println("==============================================================================");
 				System.out.println("<책관리>");
 				System.out.println("1.리스트 2.추가 3.수정 4.삭제 5.돌아가기 6.종료");
 				System.out.print(">> ");
 				num = in.nextInt();
 				in.nextLine();
-				System.out.println("========================================");
+				System.out.println("==============================================================================");
 				
 				switch(num) {
 				case 1:

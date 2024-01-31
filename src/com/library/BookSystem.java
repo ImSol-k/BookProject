@@ -19,15 +19,18 @@ public class BookSystem {
 	//책 추가함수
 	public void bookCreat() {
 		
+		bookVo = new BookVo();
+		
 		System.out.println("<책등록>");
 		System.out.print("책이름 >> ");
-		title = in.nextLine();
+		bookVo.setTitle(in.nextLine());
 		System.out.print("작가 >> ");
-		author = in.nextLine();
+		bookVo.setAuthor(in.nextLine());
 		System.out.print("출판사 >> ");
-		pubs = in.nextLine();
+		bookVo.setPubs(in.nextLine());
 		System.out.print("출판일 >> ");
-		pubDate = in.nextLine();
+		bookVo.setPubDate(in.nextLine());
+		
 		bookVo = new BookVo(title, author, pubs, pubDate);
 		bookDao.bookInsert(bookVo);
 		
