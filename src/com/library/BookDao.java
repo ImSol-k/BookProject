@@ -149,15 +149,24 @@ public class BookDao {
 			query += " )";
 
 			System.out.println(query);
-			/*
-			 * pstmt = conn.prepareStatement(query);
-			 * 
-			 * int count = 1; pstmt.setString(1, book.getTitle()); if(bookVo.getAuthor() !=
-			 * "") { count++; pstmt.setString(count, book.getAuthor()); }
-			 * if(bookVo.getPubs() != "") { count++; pstmt.setString(count, book.getPubs());
-			 * } if(bookVo.getPubDate() != "") { count++; pstmt.setString(count,
-			 * book.getPubDate()); }
-			 */
+
+			pstmt = conn.prepareStatement(query);
+
+			int count = 1;
+			pstmt.setString(1, book.getTitle());
+			if (bookVo.getAuthor() != "") {
+				count++;
+				pstmt.setString(count, book.getAuthor());
+			}
+			if (bookVo.getPubs() != "") {
+				count++;
+				pstmt.setString(count, book.getPubs());
+			}
+			if (bookVo.getPubDate() != "") {
+				count++;
+				pstmt.setString(count, book.getPubDate());
+			}
+			 
 //			pstmt.setString(2, book.getAuthor());
 //			pstmt.setString(3, book.getPubs());
 //			pstmt.setString(4, book.getPubDate());
