@@ -9,7 +9,7 @@
 -- drop database library_db;
 -- drop table librarys;
 -- drop table members;
--- drop table rents;
+ drop table rents;
 
 CREATE TABLE `librarys` (
 	`book_id`	int	auto_increment	primary key,
@@ -30,8 +30,8 @@ CREATE TABLE `members` (
 
 CREATE TABLE `rents` (
 	`rent_id`	int	auto_increment	primary key,
-	`member_num`	int	NOT NULL,
-	`book_id`	int	NOT NULL,
+	`member_num`	int,
+	`book_id`	int,
 	`rent_date`	date,
 	`return_date`	date,
     constraint rents_bfk foreign key (book_id)
