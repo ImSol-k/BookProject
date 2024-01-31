@@ -15,8 +15,8 @@ public class BookDao {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	private int bookId, memberId;
-	private String title, authorName, pubs, pub_date, rent, rentDate;
+	private int bookId;
+	private String title, authorName, pubs, pub_date;
 
 	// DB연결
 	public void bookSetting() {
@@ -52,7 +52,7 @@ public class BookDao {
 	public void bookSelect() {
 
 		try {
-			// System.out.println("select"); //확인용
+			System.out.println("select"); //확인용
 			bookSetting();
 
 			String query = "";
@@ -60,8 +60,7 @@ public class BookDao {
 			query += " 		  title,";
 			query += " 		  author,";
 			query += " 		  pubs,";
-			query += " 		  pub_date,";
-			query += " 		  rent";
+			query += " 		  pub_date";
 			query += " from librarys";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -75,6 +74,8 @@ public class BookDao {
 
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
 				bookList.add(bookVo);
+				
+				System.out.println("select"); //확인용
 
 			}
 			// System.out.println("select"); //확인용
@@ -99,28 +100,31 @@ public class BookDao {
 		bookSetting();
 
 		try {
+			System.err.println("insert"); //확인용
 			String query = "";
 			query += " insert into librarys";
-			query += " values (null, ?, ?, ?, ?,  null)";
+			query += " values (null, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
-
 			pstmt.setString(1, book.getTitle());
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setString(3, book.getPubs());
 			pstmt.setString(4, book.getPubDate());
-			// pstmt.setInt(7, book.getMemberId());
-
+			
 			pstmt.executeUpdate();
+			System.out.println("등록 되었습니다.");
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
 		close();
-	}
+	}//bookInsert()
 
 	public void bookDelete(int num) {
 		bookSetting();
 
 		try {
+			System.out.println("delete"); //확인용
+			
 			String query = "";
 			query += " delete from librarys";
 			query += " where book_id = ?";
@@ -142,13 +146,13 @@ public class BookDao {
 		bookSetting();
 		
 		try {
+			System.out.println("upDate"); //확인용
 			String query = "";
 			query += " update librarys";
 			query += "    set title = ?,";
 			query += " 		  author = ?,";
 			query += " 		  pubs = ?,";
-			query += " 		  pub_date = ?,";
-			
+			query += " 		  pub_date = ?";			
 			query += " where book_id = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, book.getTitle());

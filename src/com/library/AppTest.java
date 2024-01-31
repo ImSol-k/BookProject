@@ -5,16 +5,13 @@ public class AppTest {
 	public static void main(String[] args) {
 
 		BookDao bookDao = new BookDao();
-		BookVo bookVo = new BookVo("한권으로 읽는 조선왕조실록", "박영규", "웅진", "1996-03-10");
+		BookVo bookVo1 = new BookVo("퍼스트자바", "자바");
+		BookVo bookVo2 = new BookVo("세이노의 가르침", "세이노", "데이원");
 
-		BookVo bookVo1 = new BookVo(3,"한권 조선왕조실록", "박영규", "웅진(지식하우스)", "1996-03-10");
-		//bookDao.bookUpdate(bookVo1);
-		bookDao.bookInsert(bookVo);
+		bookDao.bookInsert(bookVo2);
 		bookDao.bookSelect();
 		bookDao.showList();
-		// bookDao.bookDelete(2);
-		// bookDao.showList();
-		
+
 	}
 
 }
