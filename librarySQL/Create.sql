@@ -23,7 +23,7 @@ CREATE TABLE `members` (
 	`member_num`	int	auto_increment	primary key,
 	`member_id`	varchar(20)	NOT NULL,
 	`member_pw`	varchar(20)	NOT NULL,
-	`name`	varchar(30)	NOT NULL,
+	`member_name`	varchar(30)	NOT NULL,
 	`ph`	varchar(20),
 	`address`	varchar(30)
 );
@@ -39,43 +39,48 @@ CREATE TABLE `rents` (
     constraint rents_mfk foreign key (member_num)
     references members (member_num)
 );
+select 
+from rents r
+join book b
+on r.book_id = b.book_id;
+
+
+select * from members;
+select * from rents;
+
+
+
+insert into rents
+values(null, (select member_num
+		     from members
+		     where member_id = 'asd'),
+         
+         2,date_format(now(),'%Y-%m-%d'),null);
+
+insert into members
+values (null,'qwe','qwe','박종희','010-888-888','주소');
+
+update rents set return_date =  date_format(now(),'%Y-%m-%d')
+where member_num = (select member_num
+					from members
+					where member_id = 'asd');
+
+insert into members
+values (null,'asd','asd','아무개','010-888-888','주소');
+
+insert into members
+values (null,'zxc','zxc','미아네','010-777-888','주소');
+
+insert into librarys
+values (null,'어린왕자','누군가','예림','2001-01-30');
+
+insert into librarys
+values (null,'메소드','그분','예랑','2011-02-10');
+
+insert into librarys
+values (null,'나집에갈래','누구','에잇','1991-11-20');
+
+
 
 select *
-from members;
-
--- 회원등록
-insert into members 
-  value(null,'diony','1234','오지원','010-4765-0429','서울');
-  insert into members 
-  value(null,'apple','1234','오지원','010-4765-0429','서울');
-  insert into members 
-  value(null,'5g1','1234','오지원','010-4765-0429','서울');
-  insert into members 
-  value(null,'5G1','1234','오지원','010-4765-0429','서울');
-  
--- 로그인  
-insert into members 
-  value(null,?,?,?,?,?);
-
-select member_id, 
-         member_pw
-  from members 
-  where member_id in (2,3);
-  
-select member_id, 
-	   member_pw
-from Login 
-where member_id in (2,2);
-
--- 작가수정
-update author 
-set author_name = '기안84', 
-    author_desc = '웹툰작가'
-where author_id = 3;
--- 회원수정
-update members
-set  member_pw =123, 
-     name = '오지원' ,
-     hp = '010-0000-1111' ,
-     address = '안산' 
-where member_id = 'ggg';
+from librarys;

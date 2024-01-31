@@ -89,7 +89,7 @@ public class ManagerSystem {
 				
 			case 4:
 				//돌아가기
-				
+				managerMain();
 				break;
 				
 			case 5:
