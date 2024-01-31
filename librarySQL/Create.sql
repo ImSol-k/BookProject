@@ -39,3 +39,43 @@ CREATE TABLE `rents` (
     constraint rents_mfk foreign key (member_num)
     references members (member_num)
 );
+
+select *
+from members;
+
+-- 회원등록
+insert into members 
+  value(null,'diony','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'apple','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'5g1','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'5G1','1234','오지원','010-4765-0429','서울');
+  
+-- 로그인  
+insert into members 
+  value(null,?,?,?,?,?);
+
+select member_id, 
+         member_pw
+  from members 
+  where member_id in (2,3);
+  
+select member_id, 
+	   member_pw
+from Login 
+where member_id in (2,2);
+
+-- 작가수정
+update author 
+set author_name = '기안84', 
+    author_desc = '웹툰작가'
+where author_id = 3;
+-- 회원수정
+update members
+set  member_pw =123, 
+     name = '오지원' ,
+     hp = '010-0000-1111' ,
+     address = '안산' 
+where member_id = 'ggg';
