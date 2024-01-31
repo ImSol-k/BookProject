@@ -12,6 +12,12 @@ public class RentVo {
 		super();
 	}
 
+	public RentVo(String rentdate, String returndate) {
+		super();
+		this.rentdate = rentdate;
+		this.returndate = returndate;
+	}
+
 	public RentVo(int rentId, int membernum, int bookId, String rentdate, String returndate) {
 		super();
 		this.rentId = rentId;
