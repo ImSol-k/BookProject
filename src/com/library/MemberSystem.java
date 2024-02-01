@@ -21,6 +21,7 @@ public class MemberSystem {
 		int menu = sc.nextInt();
 		return menu;
 	}
+	
 
 	/************* 회원가입 ****************/
 	public void insertMenu() throws ClassNotFoundException, SQLException {
@@ -70,6 +71,7 @@ public class MemberSystem {
 					System.out.println("로그인 성공! 환영합니다.");
 					System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
 					// System.out.println(vo);
+					 login.loginMain();
 					b = false;
 
 				}
@@ -84,11 +86,11 @@ public class MemberSystem {
 	/****************************************************************
 	 * 로그인 완료 후 메인 화면
 	 *****************************************************************/
-	public int inputLoginmainMenu() {
+	/*public int inputLoginmainMenu() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print(" 1. 회원 히스토리 / 2.정보수정 / 3. 책 리스트  /4. 돌아가기 /5. 종료");
-		int menu = sc.nextInt();
-		return menu;
-	}
+		int num = sc.nextInt();
+		return num;
+	}*/
 
 }
