@@ -3,102 +3,136 @@ package com.library;
 import java.util.Scanner;
 
 public class BookSystem {
-	
-	Scanner in = new Scanner(System.in);
-	BookDao bookDao = new BookDao();
-	BookVo bookVo;
+
+	private Scanner in = new Scanner(System.in);
+	private BookDao bookDao = new BookDao();
+	private BookVo bookVo;
 	private int bookId;
-	private String title, author, pubs, y, m, d, pubDate;
+	private String title, author, pubs, pubDate;
 	
-	//책 리스트 출력함수
+	
+	/************************************
+	 * 책 리스트 출력함수 *
+	 * **********************************/
 	public void bookList() {
 		System.out.println("<리스트>");
-		//bookDao.bookSelect();
-		bookDao.showList();
-	}//bookList()
+		bookDao.bookSelect();
+
+	}// bookList()
+
 	
-	//책 추가함수
+	/************************************
+	 * 책 추가함수	*
+	 * **********************************/
 	public void bookCreat() {
-		
+
+		bookVo = new BookVo();
+
 		System.out.println("<책등록>");
 		System.out.print("책이름 >> ");
-		title = in.nextLine();
+		bookVo.setTitle(in.nextLine());
 		System.out.print("작가 >> ");
-		author = in.nextLine();
+		bookVo.setAuthor(in.nextLine());
 		System.out.print("출판사 >> ");
-		pubs = in.nextLine();
-		System.out.println("출판일 >> ");
-		System.out.print("년 >> ");
-		y = in.nextLine();
-		System.out.print("월 >> ");
-		m = in.nextLine();
-		System.out.print("일 >> ");
-		d = in.nextLine();
-		pubDate = y+"-"+m+"-"+d;
+		bookVo.setPubs(in.nextLine());
+		System.out.print("출판일 >> ");
+		bookVo.setPubDate(in.nextLine());
+
 		bookVo = new BookVo(title, author, pubs, pubDate);
 		bookDao.bookInsert(bookVo);
-		
+
 		System.out.println("추가완료");
-	}//BookCreat()
+	}// BookCreat()
+
 	
+	/************************************
+	 * 책 수정함수	*
+	 * **********************************/
 	public void bookUpdate() {
 		System.out.println("<수정>");
-		
-		String[] update = new String[7];
+
+		bookVo = new BookVo();
+
 		System.out.print("수정할 책 번호 입력 (건너뛰기:enter)>> ");
-		bookId = in.nextInt();
-		
+		bookVo.setBookId(in.nextInt());
+
 		in.nextLine();
 		System.out.print("책이름 >> ");
-		update[0] = in.nextLine();
+		bookVo.setTitle(in.nextLine());
 		System.out.print("작가 >> ");
-		update[1] = in.nextLine();
+		bookVo.setAuthor(in.nextLine());
 		System.out.print("출판사 >> ");
-		update[2] = in.nextLine();
-		System.out.println("출판일 >> ");
-		System.out.print("년 >> ");
-		update[3] = in.nextLine();
-		System.out.print("월 >> ");
-		update[4] = in.nextLine();
-		System.out.print("일 >> ");
-		update[5] = in.nextLine();
-		pubDate = update[3]+"-"+update[4]+"-"+update[5];
-		for (int i = 0; i < update.length; i++) {
-			switch (i) {
-			case 0:
-				if(update[i] == null) {
-					update[i] = bookVo.getTitle();
-				}
-				break;
-			case 1:
-				if(update[i] == null) {
-					update[i] = bookVo.getAuthor();
-				}
-				break;
-			case 2:
-				if(update[i] == null) {
-					update[i] = bookVo.getPubs();
-				}
-				break;
-			case 3:
-				if(update[i] == null) {
-					update[i] = bookVo.get;
-				}
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			}
-		}
-		bookVo = new BookVo(bookId, title, author, pubs, pubDate);
+		bookVo.setPubs(in.nextLine());
+		System.out.print("출판일 >> ");
+		bookVo.setPubDate(in.nextLine());
+
+		// System.out.println(bookVo);
+
 		bookDao.bookUpdate(bookVo);
-	}//bookUpdate() 
+		// System.out.println(bookVo.getTitle() + " " + bookVo.getAuthor() + " " +
+		// bookVo.getPubs() + " " + bookVo.getPubDate());
+	}// bookUpdate()
+
 	
+	/************************************
+	 * 책 삭제함수 *
+	 * **********************************/
 	public void bookDelete() {
 		System.out.println("<삭제>");
-	}//bookDelete()
+		bookVo = new BookVo();
+
+		System.out.print("삭제할 책번호 입력 >>");
+		bookVo.setBookId(in.nextInt());
+		bookDao.bookDelete(bookVo.getBookId());
+
+	}// bookDelete()
+
 	
-	
-	
+	/************************************
+	 * 책 검색함수 *
+	 * **********************************/
+	public void bookSearch() {
+		
+		int num;
+		boolean start = true;
+		while (start) {
+			System.out.println("<검색 타입 선택>");
+			System.out.println("1.제목 2.작가 3.번호 4.뒤로가기");
+			num = in.nextInt();
+			in.nextLine();
+			switch (num) {
+			case 1:
+				findTitle();
+				break;
+			case 2:
+				findAuthor();
+				break;
+			case 3:
+				findId();
+				break;
+			case 4:
+				start = false;
+				break;
+			default:
+				System.out.println("잘못입력하셨습니다.");
+				break;
+			}//switch
+		}//while
+	}//bookSearch();
+
+	public void findTitle() {
+		System.out.print("제목검색 >> ");
+		title = in.nextLine();
+	}
+
+	public void findAuthor() {
+		System.out.print("작가검색 >> ");
+		author = in.nextLine();
+	}
+
+	public void findId() {
+		System.out.print("번호검색 >> ");
+		bookId = in.nextInt();
+	}
+
 }

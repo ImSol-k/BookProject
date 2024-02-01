@@ -23,7 +23,11 @@ CREATE TABLE `members` (
 	`member_num`	int	auto_increment	primary key,
 	`member_id`	varchar(20)	NOT NULL,
 	`member_pw`	varchar(20)	NOT NULL,
+<<<<<<< HEAD
+	`meber_name`	varchar(30)	NOT NULL,
+=======
 	`member_name`	varchar(30)	NOT NULL,
+>>>>>>> branch 'master' of https://github.com/ImSol-k/BookProject.git
 	`ph`	varchar(20),
 	`address`	varchar(30)
 );
