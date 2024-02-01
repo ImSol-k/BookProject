@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class RentDao {
 
@@ -18,6 +19,9 @@ public class RentDao {
 	private int rentId, bookId, membernum;
 	private String rentdate, returndate;
 
+	
+	Scanner sc = new Scanner(System.in);
+	
 	// DB연결
 	public void rentSetting() {
 		try {
@@ -165,33 +169,61 @@ public class RentDao {
 		close();
 	}// rentUpdate()
 	
-	public void rentIntwo(String member,int rent) {
+	public void rentIntwo(String member,int bookId) {
 
 		rentSetting();
-		MemberVo memVo = new MemberVo();
+		
+		//qwe 3번책
+		
+		//db에서 qwe 3번 (조회) 대여중,  대여가능
+		
+		//만약에 대여가능  (저장)  메세지출력
+	
+		//만약에 대여중  메세지출력
+		
+		
+		//MemberVo memVo = new MemberVo();
 		RentVo renVo = new RentVo();
-		memVo.setMember_id(member);
-		renVo.setBookId(rent);
 		try {
 			// System.out.println("insert"); //확인용
+			
+			
+			
+			
+			
+			
+			
 			String query = "";
 			query += " insert into rents";
-			query += " values (null, (select member_num\r\n"
-					+ "					     from members\r\n"
+			query += " values (null, (select member_num"
+					+ "					     from members"
 					+ "					     where member_id = ?), ?, date_format(now(),'%Y-%m-%d'), null)";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memVo.getMember_id());
-			pstmt.setInt(2, renVo.getBookId());
 			
-			pstmt.executeUpdate();
-			System.out.println("insert");
-			System.out.println("등록 되었습니다.");
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member);
+			pstmt.setInt(2, bookId);
+			
+		if(renVo.getRentdate() != null && renVo.getReturndate() == null) {
+			
+			
+			
+			
+			
+			
+		}else if(renVo.getRentdate() == null && renVo.getReturndate() == null) {
+				pstmt.executeUpdate();
+				System.out.println("대여 되었습니다.");
+		}
+			//System.out.println("insert");
+			
+			
+			
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
 		close();
-	}// rentInsert()
+	}// rentIntwo()
 	
 	
 	public void rentUptwo(RentVo rent,MemberVo member) {
@@ -222,7 +254,7 @@ public class RentDao {
 			System.out.println("error:" + e);
 		}
 		close();
-	}// Update()
+	}// rentuptwo()
 	
 	
 

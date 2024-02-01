@@ -16,6 +16,11 @@ public class RentTest {
 		//rentDao.rentUpdate(rentVo);
 		
 		rentDao.rentIntwo("qwe", 3);
+		
+		//ManagerSystem ms = new ManagerSystem();
+		
+		//ms.managerMain();
+		
 
 	}
 

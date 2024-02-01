@@ -3,6 +3,9 @@ package com.library;
 import java.util.Scanner;
 
 public class ManagerSystem {
+	
+	RentDao rentDao =new RentDao();
+	MemberVo memberVo = new MemberVo();
 
 	Scanner sc = new Scanner(System.in);
 
@@ -69,12 +72,16 @@ public class ManagerSystem {
 			System.out.print("입력란:");
 			
 			int rm = sc.nextInt();
-			
+			String cc = sc.nextLine();
 			switch (rm) {
 
 			case 1:
 				// 대여
-				
+				System.out.print("회원아이디:");
+				String id = sc.nextLine();
+				System.out.print("대여하실 책번호:");
+				int booknum = sc.nextInt();
+				rentDao.rentIntwo(id, booknum);
 				break;
 
 			case 2:
