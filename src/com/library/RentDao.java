@@ -17,7 +17,7 @@ public class RentDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private int rentId, bookId, membernum;
-	private String rentdate, returndate;
+	private String rentdate, returndate,name,title;
 
 	Scanner sc = new Scanner(System.in);
 
@@ -59,23 +59,24 @@ public class RentDao {
 			rentSetting();
 
 			String query = "";
-			query += " select rent_id, ";
-			query += " 		  member_num, ";
-			query += " 		  book_id, ";
-			query += " 		  rent_date, ";
-			query += " 		  return_date ";
-			query += " from rents";
-
+			query += " select  m.name, ";
+			query += " 		   r.book_id, ";
+			query += " 		   l.title, ";
+			query += " 		  ifnull(rent_date,'') as rent_date, ";
+			query += " 		  ifnull(return_date,'') as return_date ";
+			query += " from rents r,members m,librarys l ";
+			query += " where r.member_num = m.member_num ";
+			query += " and r.book_id = l.book_id; ";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				rentId = rs.getInt("rent_id");
-				membernum = rs.getInt("member_num");
+				name = rs.getString("name");
 				bookId = rs.getInt("book_id");
+				title = rs.getString("title");
 				rentdate = rs.getString("rent_date");
 				returndate = rs.getString("return_date");
 
-				rentVo = new RentVo(rentId, membernum, bookId, rentdate, returndate);
+				rentVo = new RentVo(name, bookId, title, rentdate, returndate);
 				rentList.add(rentVo);
 				rentVo.showrent();
 

@@ -17,7 +17,7 @@ public class MemberLogin {
 		
 		
 		while(start) {
-			System.out.println("1.히스토리 2.정보수정 3.책리스트 4.종료");
+			System.out.println("1.히스토리 2.정보수정 3.책리스트 4.로그아웃");
 			System.out.print(">> ");
 			num = in.nextInt();
 			in.nextLine();
