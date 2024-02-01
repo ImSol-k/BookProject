@@ -23,11 +23,8 @@ CREATE TABLE `members` (
 	`member_num`	int	auto_increment	primary key,
 	`member_id`	varchar(20)	NOT NULL,
 	`member_pw`	varchar(20)	NOT NULL,
-<<<<<<< HEAD
 	`meber_name`	varchar(30)	NOT NULL,
-=======
 	`member_name`	varchar(30)	NOT NULL,
->>>>>>> branch 'master' of https://github.com/ImSol-k/BookProject.git
 	`ph`	varchar(20),
 	`address`	varchar(30)
 );
@@ -43,11 +40,6 @@ CREATE TABLE `rents` (
     constraint rents_mfk foreign key (member_num)
     references members (member_num)
 );
-select 
-from rents r
-join book b
-on r.book_id = b.book_id;
-
 
 select * from members;
 select * from rents;
@@ -84,7 +76,51 @@ values (null,'메소드','그분','예랑','2011-02-10');
 insert into librarys
 values (null,'나집에갈래','누구','에잇','1991-11-20');
 
-
-
 select *
 from librarys;
+
+
+-- 회원등록
+insert into members 
+  value(null,'diony','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'apple','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'5g1','1234','오지원','010-4765-0429','서울');
+  insert into members 
+  value(null,'5G1','1234','오지원','010-4765-0429','서울');
+
+-- 로그인 정보 맞는지 틀린지
+select member_id, 
+         member_pw
+  from members 
+  where member_id in (2,3);
+  
+select member_id, 
+	   member_pw
+from Login 
+where member_id in (2,2);
+
+-- 회원삭제
+delete from members 
+where member_num=4;
+
+-- 회원수정
+update members
+set  member_pw =1234, 
+     name = '오지원',
+     hp = 010-4765-0429 ,
+     address = '안산' 
+where member_id='ggg';
+
+-- 회원 select
+select member_num,
+      member_id,
+       member_pw
+       name,
+       ph,
+       address
+from members;
+
+select *
+from members;
