@@ -16,7 +16,7 @@ public class BookDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private int bookId;
-	private String title, authorName, pubs, pub_date;
+	private String title, authorName, pubs, pub_date, rent;
 
 	/************************************
 	 * DB연결
@@ -82,6 +82,7 @@ public class BookDao {
 				bookList.add(bookVo);
 
 			}
+			
 			// System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
 			for (int i = 0; i < bookList.size(); i++) {

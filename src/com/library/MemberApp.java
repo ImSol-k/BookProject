@@ -2,23 +2,26 @@ package com.library;
 
 import java.sql.SQLException;
 
-public class MemeberApp {
+public class MemberApp {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
 		MemberSystem MSystem = new MemberSystem();
 
+		System.out.println("<도서대여 관리 프로그램>");
+		System.out.println("<회원>");
+		
 		EXIT: while (true) {
 			
 			int menu = MSystem.inputNoticeMenu();// 입력창
 					
 			switch (menu) {
 			case 1: // 회원가입
-				MSystem.insertMenu();
+				MSystem.inputLoginMenu();
 				break;
 				
-			case 2: // 로그인
-				MSystem.inputLoginMenu();
+			case 2: // 로그인				
+				MSystem.insertMenu();
 				break;
 				
 			case 3: // 종료

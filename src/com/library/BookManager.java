@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class BookManager {
 
-	public static void main(String[] args) {
+	public int bookManager() {
 
 		//bookDao.bookInsert(bookVo2);
 		//bookDao.bookSelect();
@@ -57,13 +57,14 @@ public class BookManager {
 				case 6:
 					System.out.println(line);
 					System.out.println("<돌아가기>");
-					start = true;
-					break;
+					start = false;
+					return -1;
+					
 				case 7:
 					System.out.println(line);
-					System.out.println("<프로그램 종료>");
+					//System.out.println("<프로그램 종료>");
 					start = false;
-					break;
+					return 0;
 				default:
 					System.out.println("잘못입력하셨습니다");
 					start = true;
@@ -76,7 +77,7 @@ public class BookManager {
 		
 			
 		in.close();
-		
+		return 1;
 	}//main
 	
 

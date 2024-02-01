@@ -7,6 +7,7 @@ public class BookVo {
 	private String author;
 	private String pubs;
 	private String pubDate;
+	private boolean rent;
 	
 	
 	
@@ -36,8 +37,15 @@ public class BookVo {
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 	}
-	
-	
+	public BookVo(int bookId, String title, String author, String pubs, String pubDate, boolean rent) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.author = author;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.rent = rent;
+	}
 	public int getBookId() {
 		return bookId;
 	}

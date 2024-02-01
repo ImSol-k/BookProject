@@ -92,6 +92,13 @@ public class MemberVo {
 		public void setMember_pw(String member_pw) {
 			this.member_pw = member_pw;
 		}
+		
+		
+		 
+		public void showInfo() {
+			System.out.println("회원번호 : " + member_num + "\t| ID : " + member_id + "\t| PW : " + member_pw + "\t| 이름 : "
+					+ name + "\t| 핸드폰번호 : " + ph + "\t| 주소 : " + address);
+		}
 
 		// 일반 메소드
 		@Override

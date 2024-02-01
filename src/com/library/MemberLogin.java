@@ -2,14 +2,15 @@ package com.library;
 
 import java.util.Scanner;
 
-public class MemberTest {
+public class MemberLogin {
 
-	public static void main(String[] args) {
+	public int loginMain() {
 		
 		Scanner in = new Scanner(System.in);
 		MemberManager mm = new MemberManager();
+		BookDao bookDao = new BookDao(); 
 		boolean start = true;
-		int num;
+		int num =0;
 		
 		
 		while(start) {
@@ -26,6 +27,8 @@ public class MemberTest {
 				start = true;
 				break;
 			case 3:
+				System.out.println("<책관리>");
+				bookDao.bookSelect();
 				start = true;
 				break;
 			case 4:
@@ -40,9 +43,9 @@ public class MemberTest {
 				break;
 			}
 		}
-		
-		
 		in.close();
+		return num;
+		
 	}//main()
 
 }//class()

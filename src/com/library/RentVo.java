@@ -161,7 +161,7 @@ public class RentVo {
 	}
 
 	public void showrent() {
-		System.out.println("대여순서:"+ rentId + "\t"+"책번호:" + bookId + "\t회원번호:" + membernum + "\t대여일:" + rentdate + "\t반납일:" + returndate);
+		System.out.println("책번호:" + bookId + "\t회원번호:" + membernum + "\t대여일:" + rentdate + "\t반납일:" + returndate);
 		
 		
 	}
