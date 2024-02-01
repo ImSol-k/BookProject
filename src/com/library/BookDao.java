@@ -16,7 +16,7 @@ public class BookDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private int bookId;
-	private String title, authorName, pubs, pub_date;
+	private String title, authorName, pubs, pub_date, state;
 
 	/************************************
 	 * DB연결
@@ -62,26 +62,34 @@ public class BookDao {
 			bookSetting();
 
 			String query = "";
-			query += " select book_id,";
-			query += " 		  title,";
-			query += " 		  author,";
-			query += " 		  pubs,";
-			query += " 		  pub_date";
-			query += " from librarys";
+			query += " select l.book_id, title, author, pubs, pub_date, r.rent_id, r.member_num, rent_date, return_date, ";
+			query += " 		  case when (rent_date = null) or (rent_date is not null and return_date is not null) then '대여가능'";
+			query += " 		       else '대여중' end 'state'";
+			query += " from librarys l left join ( select s.rent_id, s.member_num, s.book_id, s.rent_date, return_date ";
+			query += " 		  						 from rents s, (select max(rent_id) rent_id";
+			query += " 		  										  from rents group by book_id) b where s.rent_id = b.rent_id) r ";
+			query += " on l.book_id = r. book_id";
+			
+			
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				System.out.println("sakbfjbs");
 				bookId = rs.getInt("book_id");
 				title = rs.getString("title");
 				authorName = rs.getString("author");
 				pubs = rs.getString("pubs");
 				pub_date = rs.getString("pub_date");
-
-				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
+				state = rs.getString("state");
+				
+				
+				System.out.println("sakbfjbs");
+				
+				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date, state);
 				bookList.add(bookVo);
-
 			}
+			
 			// System.out.println("불러오기 완료"); //확인용
 			// System.out.println("select"); //확인용
 			for (int i = 0; i < bookList.size(); i++) {

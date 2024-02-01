@@ -178,7 +178,7 @@ public class MemberDao {
 				// 3. SQL문 준비 / 바인딩 / 실행
 				// -SQL문 준비
 				String query = "";
-				query += "  select member_num ";
+				query += "  select member_num, ";
 				query += "         member_id, ";
 				query += "         member_pw, ";
 				query += "         name, ";
@@ -208,8 +208,12 @@ public class MemberDao {
 				      memberList.add(memberVo);
 				}
 				
-				
-				System.out.println("list");
+				for (int i = 0; i < memberList.size(); i++) {
+					//System.out.println(memberList.get(i).toString());
+					memberList.get(i).showInfo();
+					
+				}
+				//System.out.println("list");
 
 			} catch (SQLException e) {
 				System.out.println("error:" + e);

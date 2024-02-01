@@ -7,6 +7,7 @@ public class BookVo {
 	private String author;
 	private String pubs;
 	private String pubDate;
+	private String state;
 	
 	
 	
@@ -36,8 +37,15 @@ public class BookVo {
 		this.pubs = pubs;
 		this.pubDate = pubDate;
 	}
-	
-	
+	public BookVo(int bookId, String title, String author, String pubs, String pubDate, String state) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.author = author;
+		this.pubs = pubs;
+		this.pubDate = pubDate;
+		this.state = state;
+	}
 	public int getBookId() {
 		return bookId;
 	}
@@ -71,7 +79,7 @@ public class BookVo {
 	
 	
 	public void showInfo() {
-		System.out.println("번호 : " + bookId + "\t| 제목 : " + title + "\t\t| 작가 : " + author + "\t| 출판사 : " + pubs + "\t| 출판일 : " + pubDate);
+		System.out.println("번호 : " + bookId + "\t| 제목 : " + title + "\t\t| 작가 : " + author + "\t| 출판사 : " + pubs + "\t| 출판일 : " + pubDate + "\t| 상태 : " + state);
 	}
 	
 	

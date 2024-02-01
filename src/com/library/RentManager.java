@@ -2,7 +2,7 @@ package com.library;
 
 import java.util.Scanner;
 
-public class ManagerSystem {
+public class RentManager {
 	
 	RentDao rentDao =new RentDao();
 	MemberVo memberVo = new MemberVo();
@@ -11,64 +11,11 @@ public class ManagerSystem {
 	
 	boolean go = true;
 	
-	public void managerMain() {
-
-		
-
-		while (go) {
-
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("===============================");
-			System.out.println("1.대여관리|2.회원관리|3.책관리|4.종료");
-			System.out.println("===============================");
-			System.out.print("입력란:");
-
-			int choose = sc.nextInt();
-
-			switch (choose) {
-
-					case 1:
-						// 대여관리
-						rentManagement();
-						break;
-
-					case 2:
-						// 회원관리
-						
-						break;
-						
-					case 3:
-						//책관리
-						
-						break;
-						
-					case 4:
-						//종료
-						go = false;
-						System.out.println("프로그램 종료");
-						break;
-						
-					default:
-						System.out.println("다시 입력해주세요");
-
-			}// choose
-
-		} // go
-
-	}//managerMain
-	
-	public void rentManagement() {
+	public int rentManagement() {
 		
 		boolean lo = true;
 		
 		while(lo) {
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
 			System.out.println("==================================");
 			System.out.println("1.대여|2.반납|3.대여현황|4.돌아가기|5.종료");
 			System.out.println("==================================");
@@ -100,7 +47,6 @@ public class ManagerSystem {
 				rentDao.rentSelect();
 				
 				System.out.println("뒤로 가실라면 아무키나 입력하십시오");
-				System.out.print("입력란:");
 				String back = sc.nextLine();
 				
 				break;
@@ -113,9 +59,8 @@ public class ManagerSystem {
 			case 5:
 				//종료
 				lo = false;
-				go = false;
 				System.out.println("프로그램 종료");
-				break;
+				return 0;
 				
 			default:
 				System.out.println("다시 입력해주세요");
@@ -126,7 +71,7 @@ public class ManagerSystem {
 		
 		
 		
-		
+		return 1;
 		
 	}//rentManament
 	
