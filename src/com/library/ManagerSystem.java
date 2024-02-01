@@ -99,20 +99,15 @@ public class ManagerSystem {
 				System.out.println("*대여현황*");
 				rentDao.rentSelect();
 				
-				System.out.println("뒤로 가실라면 1을 입력해주세요");
+				System.out.println("뒤로 가실라면 아무키나 입력하십시오");
 				System.out.print("입력란:");
-				int back = sc.nextInt();
-				if(back == 1) {
-					rentManagement();
-				}else {
-					System.out.println("1을 입력해주세요");
-					return;
-				}
+				String back = sc.nextLine();
+				
 				break;
 				
 			case 4:
 				//돌아가기
-				managerMain();
+				lo = false;
 				break;
 				
 			case 5:
@@ -135,6 +130,6 @@ public class ManagerSystem {
 		
 	}//rentManament
 	
-	//public rent
+	
 
 }
