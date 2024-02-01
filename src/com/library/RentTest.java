@@ -15,7 +15,8 @@ public class RentTest {
 		
 		//rentDao.rentUpdate(rentVo);
 		
-		rentDao.rentIntwo("qwe", 3);
+		//회원아이디, 책번호
+		//rentDao.rentIntwo("qwe", 3);
 		
 		//ManagerSystem ms = new ManagerSystem();
 		
