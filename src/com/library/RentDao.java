@@ -77,6 +77,7 @@ public class RentDao {
 
 				rentVo = new RentVo(rentId, membernum, bookId, rentdate, returndate);
 				rentList.add(rentVo);
+				rentVo.showrent();
 
 				// System.out.println("select"); //확인용
 
@@ -168,51 +169,6 @@ public class RentDao {
 		close();
 	}// rentUpdate()
 
-	public void rentINsel() {
-		rentSetting();
-		
-		try {
-			// System.out.println("select"); //확인용
-			rentSetting();
-
-			String query = "";
-			query += " select rent_id, ";
-			query += " 		  member_num, ";
-			query += " 		  book_id, ";
-			query += " 		  rent_date, ";
-			query += " 		  return_date ";
-			query += " from rents";
-			query += " where book_id in (select book_id";
-			query += "     				 from librarys)";
-			query += " and return_date is not null";
-			pstmt = conn.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				rentId = rs.getInt("rent_id");
-				membernum = rs.getInt("member_num");
-				bookId = rs.getInt("book_id");
-				rentdate = rs.getString("rent_date");
-				returndate = rs.getString("return_date");
-
-				rentVo = new RentVo(rentId, membernum, bookId, rentdate, returndate);
-				rentList.add(rentVo);
-
-				// System.out.println("select"); //확인용
-
-			}
-			// System.out.println("select"); //확인용
-			// for (int i = 0; i < rentList.size(); i++) {
-			// System.out.println(rentList.get(i).toString());
-			// }
-
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		}
-		close();
-
-		
-		
-	}
 
 	public void rentIntwo(String member, int bookId) {
 
@@ -304,7 +260,7 @@ public class RentDao {
 		close();
 	}// rentIntwo()
 
-	public void rentUptwo(RentVo rent) {
+	public void rentUptwo(int bookid) {
 
 		rentSetting();
 
@@ -318,7 +274,7 @@ public class RentDao {
 			query += " 		  			where book_id = ?)";
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, rent.getBookId());
+			pstmt.setInt(1,bookid);
 			
 
 			// System.out.println("upDate");

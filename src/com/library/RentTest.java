@@ -18,10 +18,11 @@ public class RentTest {
 		//회원아이디, 책번호
 		//rentDao.rentIntwo("qwe", 3);
 		
-		//ManagerSystem ms = new ManagerSystem();
+		ManagerSystem ms = new ManagerSystem();
 		
-		//ms.managerMain();
+		ms.managerMain();
 		
+		//rentDao.rentUptwo(3);
 
 	}
 

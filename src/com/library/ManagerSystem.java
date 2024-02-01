@@ -8,10 +8,12 @@ public class ManagerSystem {
 	MemberVo memberVo = new MemberVo();
 
 	Scanner sc = new Scanner(System.in);
-
+	
+	boolean go = true;
+	
 	public void managerMain() {
 
-		boolean go = true;
+		
 
 		while (go) {
 
@@ -46,6 +48,7 @@ public class ManagerSystem {
 					case 4:
 						//종료
 						go = false;
+						System.out.println("프로그램 종료");
 						break;
 						
 					default:
@@ -72,7 +75,7 @@ public class ManagerSystem {
 			System.out.print("입력란:");
 			
 			int rm = sc.nextInt();
-			String cc = sc.nextLine();
+			String err = sc.nextLine();
 			switch (rm) {
 
 			case 1:
@@ -86,12 +89,25 @@ public class ManagerSystem {
 
 			case 2:
 				// 반납
-				
+				System.out.print("반납하실 책번호:");
+				int returnbooknum = sc.nextInt();
+				rentDao.rentUptwo(returnbooknum);
 				break;
 				
 			case 3:
 				//대여현황
+				System.out.println("*대여현황*");
+				rentDao.rentSelect();
 				
+				System.out.println("뒤로 가실라면 1을 입력해주세요");
+				System.out.print("입력란:");
+				int back = sc.nextInt();
+				if(back == 1) {
+					rentManagement();
+				}else {
+					System.out.println("1을 입력해주세요");
+					return;
+				}
 				break;
 				
 			case 4:
@@ -102,6 +118,8 @@ public class ManagerSystem {
 			case 5:
 				//종료
 				lo = false;
+				go = false;
+				System.out.println("프로그램 종료");
 				break;
 				
 			default:
@@ -117,6 +135,6 @@ public class ManagerSystem {
 		
 	}//rentManament
 	
-	
+	//public rent
 
 }
