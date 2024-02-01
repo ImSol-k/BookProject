@@ -11,9 +11,13 @@ import java.util.List;
 public class MemberDao {
 	
 	// 필드
+		
+		
 		private Connection conn = null;
 		private PreparedStatement pstmt = null;
 		private ResultSet rs = null;
+		
+		
 
 		private String driver = "com.mysql.cj.jdbc.Driver";
 		private String url = "jdbc:mysql://localhost:3306/library_db";
@@ -30,10 +34,10 @@ public class MemberDao {
 
 			try {
 				// 1. JDBC 드라이버 (Oracle) 로딩
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				Class.forName(driver);
 
 				// 2. Connection 얻어오기
-				String url = "jdbc:mysql://localhost:3306/library_db";
+				
 				conn = DriverManager.getConnection(url, "library", "library");
 
 			} catch (ClassNotFoundException e) {
@@ -224,7 +228,81 @@ public class MemberDao {
 			return memberList;
 
 		}// memberList
+		   
+ /***********************************************************************
+			 ** - 회원정보수정
+  ************************************************************************/   
+		  
+				
+				public void memberInfoUpdate(MemberVo memberVo) {
+					
+					getConnection();
+					
+					
+					
+					try {
+						// System.out.println("UpDate"); //확인용
+						
+						System.out.println("오류");
+						String query = "";
 
+						query += " update members";
+						query += "    set member_id = ?";
+						System.out.println("오류");
+						if (!memberVo.getMember_pw().equals("")) {
+							query += ", 		  member_pw = ?";
+						}
+						if (!memberVo.getName().equals("")) {
+							query += ", 		  member_name = ?";
+						}
+						if (!memberVo.getPh().equals("")) {
+							query += ", 		  ph = ?";
+						}
+						if (!memberVo.getAddress().equals("")) {
+							query += ", 		  address = ?";
+						}
+						query += " where member_id = ?";
+
+						// System.out.println(query);
+						// System.out.println(member);
+
+						pstmt = conn.prepareStatement(query);
+						
+						int count = 1;
+						pstmt.setString(count, memberVo.getMember_id());
+
+						if (!memberVo.getMember_pw().equals("")) {
+							count++;
+							pstmt.setString(count, memberVo.getMember_pw());
+						}
+						if (!memberVo.getName().equals("")) {
+							count++;
+							pstmt.setString(count, memberVo.getName());
+						}
+						if (!memberVo.getPh().equals("")) {
+							count++;
+							pstmt.setString(count, memberVo.getPh());
+						}
+						if (!memberVo.getAddress().equals("")) {
+							count++;
+							pstmt.setString(count, memberVo.getAddress() );
+						}
+						
+						count++;
+						pstmt.setString(count, memberVo.getMember_id());
+						
+						// rs = pstmt.executeQuery();
+						pstmt.executeUpdate();
+						// System.out.println("수정되었습니다");
+						System.out.println("오류");
+
+					} catch (SQLException e) {
+						System.out.println("error:" + e);
+					}
+					close();
+
+				}// MemberInfoUpdate()
 	
 
-}
+		   }
+	   
