@@ -9,6 +9,7 @@ public class MemberLogin {
 		Scanner in = new Scanner(System.in);
 		MemberManager mm = new MemberManager();
 		BookDao bookDao = new BookDao(); 
+		
 		boolean start = true;
 		int num =0;
 		

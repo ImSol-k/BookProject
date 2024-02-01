@@ -16,11 +16,11 @@ public class MemberApp {
 			int menu = MSystem.inputNoticeMenu();// 입력창
 					
 			switch (menu) {
-			case 1: // 회원가입
+			case 1: // 로그인
 				MSystem.inputLoginMenu();
 				break;
 				
-			case 2: // 로그인				
+			case 2: // 회원가입				
 				MSystem.insertMenu();
 				break;
 				
