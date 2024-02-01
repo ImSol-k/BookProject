@@ -19,8 +19,8 @@ public class BookDao {
 	private String title, authorName, pubs, pub_date;
 
 	/************************************
-	 * DB연결 *
-	 ************************************/
+	 * DB연결
+	 */
 	public void bookSetting() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,8 +35,8 @@ public class BookDao {
 	}// bookSetting()
 
 	/************************************
-	 * 자원정리 *
-	 ************************************/
+	 * 자원정리
+	 */
 	public void close() {
 		try {
 			if (rs != null) {
@@ -54,8 +54,8 @@ public class BookDao {
 	}// close()
 
 	/************************************
-	 * Select *
-	 ************************************/
+	 * Select
+	 */
 	public void bookSelect() {
 		bookList = new ArrayList<BookVo>();
 		try {
@@ -97,79 +97,53 @@ public class BookDao {
 	}// bookSelect()
 
 	/************************************
-	 * showList *
-	 ************************************/
-	/*
-	 * public void showList() { try { bookSetting();
-	 * 
-	 * String query = ""; query += " select book_id,"; query += " 		  title,";
-	 * query += " 		  author,"; query += " 		  pubs,"; query +=
-	 * " 		  pub_date"; query += " from librarys"; pstmt =
-	 * conn.prepareStatement(query); rs = pstmt.executeQuery();
-	 * 
-	 * while (rs.next()) { bookId = rs.getInt("book_id"); title =
-	 * rs.getString("title"); authorName = rs.getString("author"); pubs =
-	 * rs.getString("pubs"); pub_date = rs.getString("pub_date");
-	 * 
-	 * bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
-	 * //bookList.add(bookVo); }
-	 * 
-	 * } catch (SQLException e) { System.out.println("error:" + e); } close(); for
-	 * (int i = 0; i < bookList.size(); i++) {
-	 * System.out.println(bookList.get(i).toString()); } }//showList()
+	 * Insert
 	 */
-
-	/************************************
-	 * Insert *
-	 ************************************/
 	public void bookInsert(BookVo book) {
 		bookSetting();
 
 		try {
-			// System.err.println("insert"); //확인용
+			// System.out.println("insert" + book); //확인용
 			String query = "";
 			query += " insert into librarys";
 			query += " values (null";
 			query += " , ?";
-			if (bookVo.getAuthor() != "") {
+			// System.out.println("if");
+			if (book.getAuthor() != "") {
 				query += " , ?";
 			} else {
 				query += " , null";
 			}
-			if (bookVo.getPubs() != "") {
+			if (book.getPubs() != "") {
 				query += " , ?";
 			} else {
 				query += " , null";
 			}
-			if (bookVo.getPubDate() != "") {
+			if (book.getPubDate() != "") {
 				query += " , ?";
 			} else {
 				query += " , null";
 			}
 			query += " )";
 
-			System.out.println(query);
+			// System.out.println("query" + query);
 
 			pstmt = conn.prepareStatement(query);
 
 			int count = 1;
 			pstmt.setString(1, book.getTitle());
-			if (bookVo.getAuthor() != "") {
+			if (book.getAuthor() != "") {
 				count++;
 				pstmt.setString(count, book.getAuthor());
 			}
-			if (bookVo.getPubs() != "") {
+			if (book.getPubs() != "") {
 				count++;
 				pstmt.setString(count, book.getPubs());
 			}
-			if (bookVo.getPubDate() != "") {
+			if (book.getPubDate() != "") {
 				count++;
 				pstmt.setString(count, book.getPubDate());
 			}
-			 
-//			pstmt.setString(2, book.getAuthor());
-//			pstmt.setString(3, book.getPubs());
-//			pstmt.setString(4, book.getPubDate());
 
 			pstmt.executeUpdate();
 			System.out.println("등록 되었습니다.");
@@ -181,8 +155,8 @@ public class BookDao {
 	}// bookInsert()
 
 	/************************************
-	 * Delete *
-	 ************************************/
+	 * Delete
+	 */
 	public void bookDelete(int num) {
 		bookSetting();
 
@@ -206,8 +180,8 @@ public class BookDao {
 	}// bookDelete()
 
 	/************************************
-	 * Update *
-	 ************************************/
+	 * Update
+	 */
 	public void bookUpdate(BookVo book) {
 		bookSetting();
 
@@ -232,8 +206,8 @@ public class BookDao {
 			}
 			query += " where book_id = ?";
 
-			System.out.println(query);
-			System.out.println(book);
+			// System.out.println(query);
+			// System.out.println(book);
 
 			pstmt = conn.prepareStatement(query);
 
@@ -270,5 +244,70 @@ public class BookDao {
 		close();
 
 	}// bookUpdate()
+
+	/************************************
+	 * Find
+	 */
+	public void bookFind(int num, String str) {
+		
+		BookSystem bookS = new BookSystem();
+		bookList = new ArrayList<BookVo>();
+		
+		try {
+			bookSetting();
+
+			String query = "";
+			query += " select book_id,";
+			query += "		  title,";
+			query += "		  author,";
+			query += "		  pubs,";
+			query += "		  pub_date";
+			query += " from librarys";
+			//System.out.println("bookFind");
+			
+			switch(num) {
+			case 1:
+				query += " where title = ?";				
+				break;
+			case 2:
+				query += " where author = ?";
+				break;
+			case 3:
+				query += " where book_id = ?";
+				break;
+			}
+			
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, str);
+
+			rs = pstmt.executeQuery();
+			boolean where = false;
+			while (rs.next()) {
+				where = true;
+				bookId = rs.getInt("book_id");
+				title = rs.getString("title");
+				authorName = rs.getString("author");
+				pubs = rs.getString("pubs");
+				pub_date = rs.getString("pub_date");
+
+				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date);
+				bookList.add(bookVo);
+
+			}
+			if (where) {
+				for (int i = 0; i < bookList.size(); i++) {
+					bookList.get(i).showInfo();
+				}
+			} else {
+				System.out.println("검색결과 없음");
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		
+		//System.out.println("종료");
+	}// bookFind()
 
 }
