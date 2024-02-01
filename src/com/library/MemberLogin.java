@@ -11,7 +11,7 @@ public class MemberLogin {
 		Scanner in = new Scanner(System.in);
 		BookDao bookDao = new BookDao(); 
 		RentDao rentDao = new RentDao();
-		
+		MemberDao memberDao= new MemberDao();
 		boolean start = true;
 		int num =0;
 		
@@ -26,9 +26,25 @@ public class MemberLogin {
 				rentDao.myHistory(id);
 				start = true;
 				break;
+				
 			case 2:
+				System.out.println("회원수정 위해 필요한 정보를 입력하세요.");
+			
+				System.out.print("password = ");
+				String password = in.nextLine();
+				System.out.print("name = ");
+				String name = in.nextLine();
+				System.out.print("ph = ");
+				String ph = in.nextLine();
+				System.out.print("address = ");
+				String address = in.nextLine();
+
+				// 입력받은 데이터 member에 저장.
+				MemberVo member = new MemberVo(id, password, name, ph, address);
+				memberDao.memberInfoUpdate(member);
 				start = true;
 				break;
+				
 			case 3:
 				System.out.println("<책리스트>");
 				bookDao.bookSelect();
