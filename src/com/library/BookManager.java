@@ -2,7 +2,7 @@ package com.library;
 
 import java.util.Scanner;
 
-public class AppTest {
+public class BookManager {
 
 	public static void main(String[] args) {
 

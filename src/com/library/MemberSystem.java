@@ -48,29 +48,33 @@ public class MemberSystem {
 	}
 
 	/************* 로그인 ****************/
-	public String inputLoginMenu() throws ClassNotFoundException, SQLException {
+	public String inputLoginMenu() {
 		Scanner sc = new Scanner(System.in);
+		try {
+			boolean b = true;
+			while (b) {
+				System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ 회원 로그인 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
+				System.out.println(" 로그인을 위한 회원정보를 입력하세요 >> ");
+				System.out.print(" id = ");
+				String id = sc.nextLine();
+				System.out.print(" password = ");
+				String password = sc.nextLine();
 
-		boolean b = true;
-		while (b) {
-			System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ 회원 로그인 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
-			System.out.println(" 로그인을 위한 회원정보를 입력하세요 >> ");
-			System.out.print(" id = ");
-			String id = sc.nextLine();
-			System.out.print(" password = ");
-			String password = sc.nextLine();
+				MemberVo vo = dao.MemberData(id, password);
 
-			MemberVo vo = dao.MemberData(id, password);
-
-			if (vo == null) {
-				System.out.println("아이디나 비밀번호가 다릅니다. 다시 입력해주세요.");
-				continue;
-			} else {
-				System.out.println("로그인 성공! 환영합니다.");
-				System.out.println(vo);
-				b = false;
+				if (vo == null) {
+					System.out.println("아이디나 비밀번호가 다릅니다. 다시 입력해주세요.");
+					continue;
+				} else {
+					System.out.println("로그인 성공! 환영합니다.");
+					System.out.println(vo);
+					b = false;
+				}
 			}
-		}
+		} catch (Exception e) {
+	// TODO: handle exception
+}
+		
 		return id;
 		
 	}
@@ -108,7 +112,7 @@ public class MemberSystem {
 		// 입력받은 데이터 member에 저장.
 		MemberVo member = new MemberVo(password, name, ph, address);
 
-		dao.MemberUpdete(password, name, ph, address);
+		//dao.MemberUpdete(password, name, ph, address);
 
 	}
 
