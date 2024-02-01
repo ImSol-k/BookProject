@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDao {
 	
@@ -160,7 +162,65 @@ public class MemberDao {
 			return memberVo;
 
 		}
-		
+		/***********************************************************************
+		 ** - 회원 리스트
+		 ************************************************************************/
+		   public List<MemberVo>memberList(){
+
+			this.getConnection();
+			
+			//리스트 준비
+	        List<MemberVo> memberList = new ArrayList<MemberVo>();
+			
+			
+			try {
+
+				// 3. SQL문 준비 / 바인딩 / 실행
+				// -SQL문 준비
+				String query = "";
+				query += "  select member_num ";
+				query += "         member_id, ";
+				query += "         member_pw, ";
+				query += "         name, ";
+				query += "         ph, ";
+				query += "         address ";
+				query += "  from members ";
+				
+
+				// -바인딩
+				pstmt = conn.prepareStatement(query);
+
+
+				// -실행
+				rs = pstmt.executeQuery();
+				
+				
+				// 4.결과처리
+				while (rs.next()) {
+				      int no = rs.getInt("member_num");//칼럼명
+				      String id = rs.getString("member_id");
+				      String pw = rs.getString("member_pw");
+				      String name = rs.getString("name");
+				      String ph = rs.getString("ph");
+				      String address = rs.getString("address");
+				      
+				      MemberVo memberVo = new MemberVo(no, id, pw, name, ph, address);
+				      memberList.add(memberVo);
+				}
+				
+				
+				System.out.println("list");
+
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
+
+			this.close();
+
+			return memberList;
+
+		}// memberList
+
 	
 
 }

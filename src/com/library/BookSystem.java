@@ -12,8 +12,7 @@ public class BookSystem {
 	
 	
 	/************************************
-	 * 책 리스트 출력함수 *
-	 * **********************************/
+	 * 책 리스트 출력함수 */
 	public void bookList() {
 		System.out.println("<리스트>");
 		bookDao.bookSelect();
@@ -22,8 +21,7 @@ public class BookSystem {
 
 	
 	/************************************
-	 * 책 추가함수	*
-	 * **********************************/
+	 * 책 추가함수	*/
 	public void bookCreat() {
 
 		bookVo = new BookVo();
@@ -38,16 +36,15 @@ public class BookSystem {
 		System.out.print("출판일 >> ");
 		bookVo.setPubDate(in.nextLine());
 
-		bookVo = new BookVo(title, author, pubs, pubDate);
-		bookDao.bookInsert(bookVo);
-
-		System.out.println("추가완료");
+		//bookVo = new BookVo(bookVo.getTitle(), bookVo.getAuthor(), bookVo.getPubs(), bookVo.getPubDate());
+		//System.out.println("creat" + bookVo);
+		//System.out.println("추가완료");
+		bookDao.bookInsert(bookVo);	
 	}// BookCreat()
-
+ 
 	
 	/************************************
-	 * 책 수정함수	*
-	 * **********************************/
+	 * 책 수정함수	*/
 	public void bookUpdate() {
 		System.out.println("<수정>");
 
@@ -66,7 +63,7 @@ public class BookSystem {
 		System.out.print("출판일 >> ");
 		bookVo.setPubDate(in.nextLine());
 
-		// System.out.println(bookVo);
+		 //System.out.println(bookVo);
 
 		bookDao.bookUpdate(bookVo);
 		// System.out.println(bookVo.getTitle() + " " + bookVo.getAuthor() + " " +
@@ -75,8 +72,7 @@ public class BookSystem {
 
 	
 	/************************************
-	 * 책 삭제함수 *
-	 * **********************************/
+	 * 책 삭제함수 */
 	public void bookDelete() {
 		System.out.println("<삭제>");
 		bookVo = new BookVo();
@@ -89,15 +85,15 @@ public class BookSystem {
 
 	
 	/************************************
-	 * 책 검색함수 *
-	 * **********************************/
-	public void bookSearch() {
+	 * 책 검색함수 */
+	public int bookSearch() {
 		
-		int num;
+		int num = 0;
 		boolean start = true;
 		while (start) {
 			System.out.println("<검색 타입 선택>");
 			System.out.println("1.제목 2.작가 3.번호 4.뒤로가기");
+			System.out.print(">> ");
 			num = in.nextInt();
 			in.nextLine();
 			switch (num) {
@@ -118,21 +114,26 @@ public class BookSystem {
 				break;
 			}//switch
 		}//while
+		return num;
 	}//bookSearch();
 
 	public void findTitle() {
 		System.out.print("제목검색 >> ");
 		title = in.nextLine();
+		bookDao.bookFind(1, title);
 	}
 
 	public void findAuthor() {
 		System.out.print("작가검색 >> ");
 		author = in.nextLine();
+		bookDao.bookFind(2, author);
 	}
 
 	public void findId() {
+		String id;
 		System.out.print("번호검색 >> ");
-		bookId = in.nextInt();
+		id = in.nextLine();
+		bookDao.bookFind(3, id);
 	}
 
 }
