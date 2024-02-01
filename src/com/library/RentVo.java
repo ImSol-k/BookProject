@@ -20,6 +20,14 @@ public class RentVo {
 	public RentVo() {
 	}
 
+	
+	
+	public RentVo(String member_id) {
+		this.member_id = member_id;
+	}
+
+
+
 	public RentVo(String rentdate, String returndate) {
 		this.rentdate = rentdate;
 		this.returndate = returndate;

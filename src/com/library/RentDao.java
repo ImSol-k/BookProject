@@ -186,6 +186,7 @@ public class RentDao {
 		RentVo renVo = new RentVo();
 		String date = "";
 		int num = 0;
+		String memid = "";
 		try {
 			// System.out.println("insert"); //확인용
 			/************************
@@ -211,9 +212,9 @@ public class RentDao {
 			 * 찾은 책의 반납여부 확인
 			 */
 			query = "";
-			query += " select return_date";
-			query += "   from rents";
-			query += " where book_id = ?";
+			query += " select return_date ";
+			query += "   from rents ";
+			query += " where book_id = ? ";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, num);	
 			rs = pstmt.executeQuery();
@@ -222,7 +223,21 @@ public class RentDao {
 				date = rs.getString("return_date");
 			}
 			//System.out.println(date);
+			//System.out.println("WWWW");
+			query = "";
+			query += " select member_id ";
+			query += " from members ";
+			query += " where member_id = ?";
 			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member);
+			
+			rs = pstmt.executeQuery();
+			//System.out.println("WWWW");
+			
+		    while(rs.next()) {
+		    	memid = rs.getString("member_id");
+		    }
 			
 			query = "";
 			query += " insert into rents";
@@ -235,7 +250,10 @@ public class RentDao {
 			pstmt.setString(1, member);
 			pstmt.setInt(2, bookId);
 			
-			if(date == null) {
+			if(memid.equals("")){
+				//대여불가
+			    System.out.println("잘못된 아이디 입니다.");
+			}else if(date == null) {
 				//대여불가
 				System.out.println("대여중인 책입니다.");
 			}
