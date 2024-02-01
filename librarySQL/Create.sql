@@ -7,8 +7,8 @@
     
 
 -- drop database library_db;
--- drop table librarys;
--- drop table members;
+drop table librarys;
+drop table members;
  drop table rents;
 
 CREATE TABLE `librarys` (
@@ -23,11 +23,8 @@ CREATE TABLE `members` (
 	`member_num`	int	auto_increment	primary key,
 	`member_id`	varchar(20)	NOT NULL,
 	`member_pw`	varchar(20)	NOT NULL,
-<<<<<<< HEAD
 	`meber_name`	varchar(30)	NOT NULL,
-=======
 	`member_name`	varchar(30)	NOT NULL,
->>>>>>> branch 'master' of https://github.com/ImSol-k/BookProject.git
 	`ph`	varchar(20),
 	`address`	varchar(30)
 );
@@ -67,7 +64,7 @@ values (null,'qwe','qwe','박종희','010-888-888','주소');
 update rents set return_date =  date_format(now(),'%Y-%m-%d')
 where member_num = (select member_num
 					from members
-					where member_id = 'asd');
+					where member_id = 'qwe');
 
 insert into members
 values (null,'asd','asd','아무개','010-888-888','주소');
