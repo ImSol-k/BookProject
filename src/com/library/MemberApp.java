@@ -6,30 +6,32 @@ public class MemberApp {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-		MemberSystem MSystem = new MemberSystem();
+		MemberSystem mSystem = new MemberSystem();
 
 		System.out.println("<도서대여 관리 프로그램>");
 		System.out.println("<회원>");
 		
-		EXIT: while (true) {
+		boolean action = true;
+		while (action) {
 			
-			int menu = MSystem.inputNoticeMenu();// 입력창
+			int menu = mSystem.inputNoticeMenu();// 입력창
 					
 			switch (menu) {
-			case 1: // 로그인
-				MSystem.inputLoginMenu();
+			case 1: // 로그인\
+				mSystem.inputLoginMenu();
 				break;
 				
 			case 2: // 회원가입				
-				MSystem.insertMenu();
+				mSystem.insertMenu();
 				break;
 				
 			case 3: // 종료
 				System.out.println("종료되었습니다. 안녕히가세요!.");
-				break EXIT;
+				action=false;
+				break ;
 				
 			default:
-				System.out.println(" ");
+				System.out.println("메뉴를 다시입력해주세요");
 				break;
 
 			}

@@ -9,9 +9,7 @@ public class ManagerApp {
 		Scanner in = new Scanner(System.in);
 		BookManager bookM = new BookManager();
 		RentManager rentM = new RentManager();
-		RentDao rentDao = new RentDao();
 		MemberDao memberDao = new MemberDao();
-		MemberLogin meml = new MemberLogin();
 		boolean start = true;
 		int num;
 		

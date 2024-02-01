@@ -14,6 +14,8 @@ public class MemberDao {
 		private Connection conn = null;
 		private PreparedStatement pstmt = null;
 		private ResultSet rs = null;
+		private List<RentVo> rentList = null;
+		private RentVo rentVo;
 
 		private String driver = "com.mysql.cj.jdbc.Driver";
 		private String url = "jdbc:mysql://localhost:3306/library_db";
@@ -117,6 +119,8 @@ public class MemberDao {
 		 * 
 		 * @throws SQLException
 		 ************************************************************************/
+		
+		//로그인한 사용자 정보 가져오기
 		public MemberVo MemberData(String member_id, String member_pw) throws ClassNotFoundException, SQLException {
 
 			MemberVo memberVo = null;
@@ -225,6 +229,6 @@ public class MemberDao {
 
 		}// memberList
 
-	
+
 
 }

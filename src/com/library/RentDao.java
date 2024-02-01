@@ -173,22 +173,10 @@ public class RentDao {
 	public void rentIntwo(String member, int bookId) {
 
 		rentSetting();
-
-		// qwe 3번책
-
-		// db에서 qwe 3번 (조회) 대여중, 대여가능
-
-		// 만약에 대여가능 (저장) 메세지출력
-
-		// 만약에 대여중 메세지출력
-
-		// MemberVo memVo = new MemberVo();
-		RentVo renVo = new RentVo();
 		String date = "";
 		int num = 0;
 		String memid = "";
 		try {
-			// System.out.println("insert"); //확인용
 			/************************
 			 * 책번호찾기
 			 */
@@ -206,7 +194,6 @@ public class RentDao {
 			while(rs.next()) {
 			num = rs.getInt("book_id");
 			}
-			//System.out.println(num);
 			
 			/************************
 			 * 찾은 책의 반납여부 확인
@@ -222,8 +209,6 @@ public class RentDao {
 			while(rs.next()) {
 				date = rs.getString("return_date");
 			}
-			//System.out.println(date);
-			//System.out.println("WWWW");
 			query = "";
 			query += " select member_id ";
 			query += " from members ";
@@ -233,7 +218,6 @@ public class RentDao {
 			pstmt.setString(1, member);
 			
 			rs = pstmt.executeQuery();
-			//System.out.println("WWWW");
 			
 		    while(rs.next()) {
 		    	memid = rs.getString("member_id");
@@ -249,13 +233,14 @@ public class RentDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member);
 			pstmt.setInt(2, bookId);
-			
 			if(memid.equals("")){
 				//대여불가
 			    System.out.println("잘못된 아이디 입니다.");
-			}else if(date == null) {
+			}
+			
+			if(date == null) {
 				//대여불가
-				System.out.println("대여중인 책입니다.");
+				System.out.println("대여불가능한 책입니다.");
 			}
 			else {
 				//대여가능
@@ -263,15 +248,9 @@ public class RentDao {
 				System.out.println("대여 되었습니다.");
 			}
 			
-
-			//if () {
-
-			//} else if (renVo.getRentdate() == null && renVo.getReturndate() == null) {
-			//	pstmt.executeUpdate();
-			//	System.out.println("대여 되었습니다.");
-			//}
-			 //System.out.println(renVo.getRentdate());
-
+			
+			
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
@@ -304,5 +283,54 @@ public class RentDao {
 		}
 		close();
 	}// rentuptwo()
+	
+	public void myHistory(String id) {
+		System.out.println("bb");
+		rentList = new ArrayList<RentVo>();
+		try {
+			rentSetting();
+
+			System.out.println("<히스토리>");
+			String query = "";
+			query += " select m.name,";
+			query += " 		  r.booK_id,";
+			query += " 		  title,";
+			query += " 		  rent_date,";
+			query += " 		  return_date ";
+			query += " from librarys l, rents r, (select member_num, name ";
+			query += " 		  					    from members ";
+			query += " 		 					   where member_id = ?) m ";
+			query += " where m.member_num = r.member_num ";
+			query += "   and r.book_id = l.book_id ";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			String name, title, rentDate, returnDate;
+			int bookid;
+			while (rs.next()) {
+				name = rs.getString("name");
+				bookid = rs.getInt("book_id");
+				title = rs.getString("title");
+				rentDate = rs.getString("rent_date");
+				returnDate = rs.getString("return_date");
+
+				rentVo= new RentVo(rentDate, returnDate, name, title, bookid);
+				rentList.add(rentVo);
+
+			}
+			// System.out.println("불러오기 완료"); //확인용
+			// System.out.println("select"); //확인용
+			for (int i = 0; i < rentList.size(); i++) {
+				// System.out.println(bookList.get(i).toString());
+				rentList.get(i).showrent();
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}
 
 }

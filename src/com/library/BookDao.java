@@ -75,16 +75,12 @@ public class BookDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("sakbfjbs");
 				bookId = rs.getInt("book_id");
 				title = rs.getString("title");
 				authorName = rs.getString("author");
 				pubs = rs.getString("pubs");
 				pub_date = rs.getString("pub_date");
 				state = rs.getString("state");
-				
-				
-				System.out.println("sakbfjbs");
 				
 				bookVo = new BookVo(bookId, title, authorName, pubs, pub_date, state);
 				bookList.add(bookVo);

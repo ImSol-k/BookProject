@@ -63,17 +63,16 @@ public class MemberSystem {
 				String password = sc.nextLine();
 
 				MemberVo vo = dao.MemberData(id, password);
-
+				
 				if (vo == null) {
 					System.out.println("아이디나 비밀번호가 다릅니다. 다시 입력해주세요.");
-					continue;
+
 				} else {
 					System.out.println("로그인 성공! 환영합니다.");
 					System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
-					// System.out.println(vo);
-					 login.loginMain();
+					login.loginMain(id);
+					
 					b = false;
-
 				}
 			}
 		} catch (Exception e) {
