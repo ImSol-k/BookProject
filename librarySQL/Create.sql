@@ -106,17 +106,26 @@ delete from members
 where member_num=4;
 
 -- 회원수정
+update members m, (select m.member_num
+               from members m
+               where m.member_id = 'ggg') s
+set  m.member_pw =1234, 
+     m.name = '오지원',
+     m.ph = '010-0000-0000' ,
+     m.address = '부산' 
+where m.member_num=s.member_num;
+
 update members
 set  member_pw =1234, 
      name = '오지원',
-     hp = 010-4765-0429 ,
-     address = '안산' 
+     ph = '010-4765-0429' ,
+     address = '부산' 
 where member_id='ggg';
 
 -- 회원 select
 select member_num,
       member_id,
-       member_pw
+       member_pw,
        name,
        ph,
        address
