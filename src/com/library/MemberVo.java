@@ -14,6 +14,15 @@ public class MemberVo {
 		public MemberVo() {
 
 		}
+		
+		public MemberVo(String member_pw, String name, String ph, String address) {
+
+		
+			this.member_pw = member_pw;
+			this.name = name;
+			this.ph = ph;
+			this.address = address;
+		}
 
 		public MemberVo(String member_id, String member_pw, String name, String ph, String address) {
 
