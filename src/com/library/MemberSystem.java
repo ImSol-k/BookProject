@@ -69,9 +69,15 @@ public class MemberSystem {
 					continue;
 				} else {
 					System.out.println("로그인 성공! 환영합니다.");
+<<<<<<< HEAD
 					System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
 					// System.out.println(vo);
 					 login.loginMain();
+=======
+					System.out.println("⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯");
+					login.loginMain(id);
+					
+>>>>>>> refs/remotes/origin/master
 					b = false;
 
 				}

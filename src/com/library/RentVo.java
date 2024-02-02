@@ -20,12 +20,28 @@ public class RentVo {
 	public RentVo() {
 	}
 
+<<<<<<< HEAD
+=======
+	public RentVo(String member_id) {
+		this.member_id = member_id;
+	}
+
+>>>>>>> refs/remotes/origin/master
 	public RentVo(String rentdate, String returndate) {
 		this.rentdate = rentdate;
 		this.returndate = returndate;
 	}
 
 	public RentVo(String rentdate, String returndate, String name, String title) {
+		this.rentdate = rentdate;
+		this.returndate = returndate;
+		this.name = name;
+		this.title = title;
+	}
+
+	public RentVo( String name,int bookId, String title, String rentdate, String returndate) {
+		super();
+		this.bookId = bookId;
 		this.rentdate = rentdate;
 		this.returndate = returndate;
 		this.name = name;
@@ -161,9 +177,15 @@ public class RentVo {
 	}
 
 	public void showrent() {
+<<<<<<< HEAD
 		System.out.println("책번호:" + bookId + "\t회원번호:" + membernum + "\t대여일:" + rentdate + "\t반납일:" + returndate);
 		
 		
+=======
+		System.out.println(
+				"회원이름 : " + name + " \t책번호:" + bookId + "\t책이름:" + title + "\t대여일:" + rentdate + "\t반납일:" + returndate);
+
+>>>>>>> refs/remotes/origin/master
 	}
 
 }
