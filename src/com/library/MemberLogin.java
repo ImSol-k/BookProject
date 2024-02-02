@@ -25,6 +25,7 @@ public class MemberLogin {
 				start = true;
 				break;
 			case 2:
+				
 				start = true;
 				break;
 			case 3:

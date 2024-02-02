@@ -243,12 +243,12 @@ public class MemberDao {
 					try {
 						// System.out.println("UpDate"); //확인용
 						
-						System.out.println("오류");
+						
 						String query = "";
 
 						query += " update members";
 						query += "    set member_id = ?";
-						System.out.println("오류");
+						
 						if (!memberVo.getMember_pw().equals("")) {
 							query += ", 		  member_pw = ?";
 						}
@@ -294,7 +294,7 @@ public class MemberDao {
 						// rs = pstmt.executeQuery();
 						pstmt.executeUpdate();
 						// System.out.println("수정되었습니다");
-						System.out.println("오류");
+						
 
 					} catch (SQLException e) {
 						System.out.println("error:" + e);

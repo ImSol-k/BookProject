@@ -46,7 +46,7 @@ public class RentManager {
 				System.out.println("*대여현황*");
 				rentDao.rentSelect();
 				
-				System.out.println("뒤로 가실라면 아무키나 입력하십시오");
+				System.out.println("뒤로 가시려면 아무키나 입력하십시오");
 				String back = sc.nextLine();
 				
 				break;
